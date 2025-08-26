@@ -1,3 +1,5 @@
+# Weather-Forecasts
+
 ### Disclaimer
 The task is not mine. You can view it [here (PDF)](https://github.com/ManosMorf97/Weather-Forecast/blob/main/Weather%20forecasts.pdf)  
 The original repository can be found [here](https://github.com/billk97/weather-api).  
