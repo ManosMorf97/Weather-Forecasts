@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@seald-io/binary-search-tree": "^1.0.3",
+    "jest": "^30.0.5",
+    "sequelize": "^6.37.7",
+    "tedious": "^18.6.1"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  }
+}

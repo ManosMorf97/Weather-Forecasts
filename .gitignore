@@ -1,0 +1,3 @@
+*.vsidx
+/PredictionUpdater/node_modules/*
+/PredictionUpdater/src/api_keys.js
