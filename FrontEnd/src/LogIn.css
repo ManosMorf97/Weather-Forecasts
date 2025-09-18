@@ -1,4 +1,22 @@
 .central{
-    width: 80vw;
-    height: 60vh;
+    width: 60vw;
+    height: 45vh;
+}
+input{
+    margin:0 auto;
+}
+.background-card-color{
+    background-color: rgb(245, 243, 243);
+}
+h1{
+    margin-bottom:6vh
+}
+.border-card{
+   border-top: 4em solid;
+}
+.border-header-margin{
+margin-top: -8.5vh;
+}
+.margin-card{
+    margin-top:10vh;
 }

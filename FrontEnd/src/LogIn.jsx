@@ -8,15 +8,14 @@ function LogIn(){
     let [openEye,toggleEye]=useState(false)
     return (<>
         <div className="container">
-            <div className="central card-sm-1 card border-primary bg-primary">
-                <div className="card-header" >
-                    HELLO WORLD
-                </div>
-                <div className="card-body bg-white">
+            <div className="central card-sm-1 card border-primary border-card background-card-color">
+                <h1 className="border-header-margin">LogIn</h1>
+                <div className="card-body  justify-content-center magrin-card ">
                     <form className="form">
                         <p className="s-0">
-                           <label htmlFor="EmailUsername">Enter Email/Username </label><br></br>
+                           <label htmlFor="EmailUsername" >Enter Email/Username </label><br></br>
                             <input type="text" id="EmailUsername" className="bg-white text-dark" />    
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                         </p> 
                         <p className="s-0">
                             <label htmlFor="Password">Enter Password </label><br></br>
@@ -26,10 +25,14 @@ function LogIn(){
                         </p>
                         <br></br>
                         <input type="submit" className="bg-primary" value="LogIn" />
+                        <br></br>
+                        <br></br>
+                        <a href="#">Don't have an account. Sign Up</a>
                     </form>
                 </div>
             </div>
         </div>
+        
     
     
     
