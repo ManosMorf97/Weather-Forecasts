@@ -1,6 +1,6 @@
 .central{
     width: 60vw;
-    height: 45vh;
+    height: 48vh;
 }
 input{
     margin:0 auto;
@@ -9,14 +9,28 @@ input{
     background-color: rgb(245, 243, 243);
 }
 h1{
-    margin-bottom:6vh
-}
-.border-card{
-   border-top: 4em solid;
+    margin-bottom:6vh;
+    z-index:2;
 }
 .border-header-margin{
-margin-top: -8.5vh;
+    margin-bottom: 1vh;
 }
 .margin-card{
     margin-top:10vh;
+}
+p{
+    margin-right:5vw;
+}
+a{
+    margin-bottom:0vh;
+}
+.border-card{
+    overflow: auto;
+}
+.margin-header{
+    width:100%
+}
+
+.no-padding{
+    padding:0rem !important;
 }

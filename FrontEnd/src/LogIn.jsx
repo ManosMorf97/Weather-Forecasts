@@ -8,8 +8,8 @@ function LogIn(){
     let [openEye,toggleEye]=useState(false)
     return (<>
         <div className="container">
-            <div className="central card-sm-1 card border-primary border-card background-card-color">
-                <h1 className="border-header-margin">LogIn</h1>
+            <div className="central card-sm-1 card border-primary border-card background-card-color no-padding">
+                <h1 className="border-header-margin bg-primary margin-header">Log In</h1>
                 <div className="card-body  justify-content-center magrin-card ">
                     <form className="form">
                         <p className="s-0">
@@ -32,11 +32,6 @@ function LogIn(){
                 </div>
             </div>
         </div>
-        
-    
-    
-    
-    
     </>)
 }
 

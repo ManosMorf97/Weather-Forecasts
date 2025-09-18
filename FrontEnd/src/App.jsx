@@ -4,15 +4,18 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import LogIn from './LogIn.jsx'
+import CreateAccount from './CreateAccount.jsx'
 
 
 
 function App() {
   const [count, setCount] = useState(0)
-  let current_page="LogIn"
+  let current_page="CreateAccount"
   useEffect(()=>{},[current_page]);
   if (current_page==="LogIn")
       return LogIn()
+  if (current_page==="CreateAccount")
+    return CreateAccount()    
   return (
     <>
       <div>
