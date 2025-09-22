@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ySFkYYaTGLY=",
+  "dgSpecHash": "W06QXYuLlg8=",
   "success": true,
-  "projectFilePath": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj",
+  "projectFilePath": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\manos\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\manos\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
@@ -273,9 +273,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'Lucene.Net 3.0.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
-      "projectPath": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj",
+      "projectPath": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj",
       "warningLevel": 1,
-      "filePath": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj",
+      "filePath": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj",
       "libraryId": "Lucene.Net",
       "targetGraphs": [
         "net8.0"

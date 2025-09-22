@@ -1,41 +1,41 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\Weather-Forecast\\WeatherForecastApplication\\",
+  "WorkspaceRootPath": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|e:\\weather-forecast\\weatherforecastapplication\\weatherforecastapplication.integrationtesting\\signupnotificationtesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.integrationtesting\\signupnotificationtesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|solutionrelative:weatherforecastapplication.integrationtesting\\signupnotificationtesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|e:\\weather-forecast\\weatherforecastapplication\\weatherforecastapplication.integrationtesting\\notificationstesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.integrationtesting\\notificationstesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|solutionrelative:weatherforecastapplication.integrationtesting\\notificationstesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|e:\\weather-forecast\\weatherforecastapplication\\weatherforecastapplication.integrationtesting\\predictionstesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.integrationtesting\\predictionstesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|solutionrelative:weatherforecastapplication.integrationtesting\\predictionstesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|e:\\weather-forecast\\weatherforecastapplication\\weatherforecastapplication.web\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.web\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|solutionrelative:weatherforecastapplication.web\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|e:\\weather-forecast\\weatherforecastapplication\\weatherforecastapplication.web\\controllers\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.web\\controllers\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|solutionrelative:weatherforecastapplication.web\\controllers\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|e:\\weather-forecast\\weatherforecastapplication\\weatherforecastapplication.web\\data\\timesetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.web\\data\\timesetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|solutionrelative:weatherforecastapplication.web\\data\\timesetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|e:\\weather-forecast\\weatherforecastapplication\\weatherforecastapplication.web\\controllers\\predictionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.web\\controllers\\predictionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|solutionrelative:weatherforecastapplication.web\\controllers\\predictionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|e:\\weather-forecast\\weatherforecastapplication\\weatherforecastapplication.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|solutionrelative:weatherforecastapplication.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|e:\\weather-forecast\\weatherforecastapplication\\weatherforecastapplication.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|solutionrelative:weatherforecastapplication.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -52,24 +52,23 @@
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "TimeSetting.cs",
-              "DocumentMoniker": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Data\\TimeSetting.cs",
+              "DocumentMoniker": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Data\\TimeSetting.cs",
               "RelativeDocumentMoniker": "WeatherForecastApplication.Web\\Data\\TimeSetting.cs",
-              "ToolTip": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Data\\TimeSetting.cs",
+              "ToolTip": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Data\\TimeSetting.cs",
               "RelativeToolTip": "WeatherForecastApplication.Web\\Data\\TimeSetting.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T13:12:23.838Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T13:12:23.838Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "SignUpNotificationTesting.cs",
-              "DocumentMoniker": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\SignUpNotificationTesting.cs",
+              "DocumentMoniker": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\SignUpNotificationTesting.cs",
               "RelativeDocumentMoniker": "WeatherForecastApplication.IntegrationTesting\\SignUpNotificationTesting.cs",
-              "ToolTip": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\SignUpNotificationTesting.cs",
-              "RelativeToolTip": "WeatherForecastApplication.IntegrationTesting\\SignUpNotificationTesting.cs",
-              "ViewState": "AgIAAKUAAAAAAAAAAAAAALcAAAA1AAAAAAAAAA==",
+              "ToolTip": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\SignUpNotificationTesting.cs*",
+              "RelativeToolTip": "WeatherForecastApplication.IntegrationTesting\\SignUpNotificationTesting.cs*",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAAAHcAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-25T12:26:09.351Z",
               "EditorCaption": ""
@@ -78,35 +77,33 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "PredictionsTesting.cs",
-              "DocumentMoniker": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\PredictionsTesting.cs",
+              "DocumentMoniker": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\PredictionsTesting.cs",
               "RelativeDocumentMoniker": "WeatherForecastApplication.IntegrationTesting\\PredictionsTesting.cs",
-              "ToolTip": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\PredictionsTesting.cs",
+              "ToolTip": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\PredictionsTesting.cs",
               "RelativeToolTip": "WeatherForecastApplication.IntegrationTesting\\PredictionsTesting.cs",
               "ViewState": "AgIAAFkBAAAAAAAAAAAAADcAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-21T14:43:22.196Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-21T14:43:22.196Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "appsettings.Development.json",
-              "DocumentMoniker": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\appsettings.Development.json",
+              "DocumentMoniker": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\appsettings.Development.json",
               "RelativeDocumentMoniker": "WeatherForecastApplication.Web\\appsettings.Development.json",
-              "ToolTip": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\appsettings.Development.json",
+              "ToolTip": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\appsettings.Development.json",
               "RelativeToolTip": "WeatherForecastApplication.Web\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-30T12:27:57.141Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-30T12:27:57.141Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
               "Title": "Program.cs",
-              "DocumentMoniker": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Program.cs",
+              "DocumentMoniker": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Program.cs",
               "RelativeDocumentMoniker": "WeatherForecastApplication.Web\\Program.cs",
-              "ToolTip": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Program.cs",
+              "ToolTip": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Program.cs",
               "RelativeToolTip": "WeatherForecastApplication.Web\\Program.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAawAoAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -116,35 +113,33 @@
               "$type": "Document",
               "DocumentIndex": 6,
               "Title": "PredictionsController.cs",
-              "DocumentMoniker": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Controllers\\PredictionsController.cs",
+              "DocumentMoniker": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Controllers\\PredictionsController.cs",
               "RelativeDocumentMoniker": "WeatherForecastApplication.Web\\Controllers\\PredictionsController.cs",
-              "ToolTip": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Controllers\\PredictionsController.cs",
+              "ToolTip": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Controllers\\PredictionsController.cs",
               "RelativeToolTip": "WeatherForecastApplication.Web\\Controllers\\PredictionsController.cs",
               "ViewState": "AgIAACAAAAAAAAAAAAAAABsAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T10:14:02.233Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-23T10:14:02.233Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "NotificationsController.cs",
-              "DocumentMoniker": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Controllers\\NotificationsController.cs",
+              "DocumentMoniker": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Controllers\\NotificationsController.cs",
               "RelativeDocumentMoniker": "WeatherForecastApplication.Web\\Controllers\\NotificationsController.cs",
-              "ToolTip": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Controllers\\NotificationsController.cs",
+              "ToolTip": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Controllers\\NotificationsController.cs",
               "RelativeToolTip": "WeatherForecastApplication.Web\\Controllers\\NotificationsController.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAowCYAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-21T15:01:16.768Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-21T15:01:16.768Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "appsettings.json",
-              "DocumentMoniker": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\appsettings.json",
+              "DocumentMoniker": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\appsettings.json",
               "RelativeDocumentMoniker": "WeatherForecastApplication.Web\\appsettings.json",
-              "ToolTip": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\appsettings.json",
+              "ToolTip": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\appsettings.json",
               "RelativeToolTip": "WeatherForecastApplication.Web\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAACEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
@@ -154,14 +149,13 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "NotificationsTesting.cs",
-              "DocumentMoniker": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\NotificationsTesting.cs",
+              "DocumentMoniker": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\NotificationsTesting.cs",
               "RelativeDocumentMoniker": "WeatherForecastApplication.IntegrationTesting\\NotificationsTesting.cs",
-              "ToolTip": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\NotificationsTesting.cs",
+              "ToolTip": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\NotificationsTesting.cs",
               "RelativeToolTip": "WeatherForecastApplication.IntegrationTesting\\NotificationsTesting.cs",
               "ViewState": "AgIAAIoAAAAAAAAAAAAYwJIAAABUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T06:21:29.231Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-23T06:21:29.231Z"
             }
           ]
         },

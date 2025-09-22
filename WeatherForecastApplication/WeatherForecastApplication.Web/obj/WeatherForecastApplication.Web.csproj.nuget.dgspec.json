@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj": {}
+    "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj": {}
   },
   "projects": {
-    "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj": {
+    "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj",
+        "projectUniqueName": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj",
         "projectName": "WeatherForecastApplication.Web",
-        "projectPath": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj",
+        "projectPath": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj",
         "packagesPath": "C:\\Users\\manos\\.nuget\\packages\\",
-        "outputPath": "E:\\Weather-Forecast\\WeatherForecastApplication\\WeatherForecastApplication.Web\\obj\\",
+        "outputPath": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
