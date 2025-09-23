@@ -15,6 +15,7 @@ using WeatherForecastApplication.Web.Models;
 
 namespace WeatherForecastApplication.Web.Controllers
 {
+    [Produces("application/json")]
     public class AuthenticationController : Controller
     {
         readonly WeatherAppDbContext weatherAppDbContext;
@@ -103,7 +104,7 @@ namespace WeatherForecastApplication.Web.Controllers
             }
             return Ok("The User has been created");
         }
-
+        [HttpPost]
         public async Task<IActionResult> SignIn([FromBody] SignInInput signInInput)
         {
             if (!ModelState.IsValid || signInInput.Email_Username.Length == 0 || signInInput.HashedPassword.Length == 0)

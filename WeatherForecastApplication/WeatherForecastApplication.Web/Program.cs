@@ -22,6 +22,23 @@ public class Program
         UseSqlServer(builder.Configuration.GetConnectionString("WeatherApplicationDBConnectionString")).
         EnableSensitiveDataLogging().LogTo(s => Debug.WriteLine(s), LogLevel.Information));
 
+       
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(name: "AllowAllOrigins",
+                configurePolicy: policy =>
+                {
+                    policy.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            /*options.AddPolicy(name: "AllowOnlySomeOrigins",
+                configurePolicy: policy =>
+                {
+                    policy.WithOrigins("https://example1.com",
+                        "https://example2.com");
+                });*/
+        });
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -31,13 +48,12 @@ public class Program
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
-
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-        //app.UseDefaultFiles();
+        app.UseDefaultFiles();
 
         app.UseRouting();
-
+        app.UseCors("AllowAllOrigins");
         app.UseAuthorization();
 
         app.MapControllerRoute(

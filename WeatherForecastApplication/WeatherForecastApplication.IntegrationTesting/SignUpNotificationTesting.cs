@@ -16,7 +16,7 @@ using static System.Formats.Asn1.AsnWriter;
 namespace WeatherForecastApplication.IntegrationTesting
 {
     public class SignUpNotificationTesting : InMemoryDatabase
-    {
+    {//
         public SignUpNotificationTesting(WeatherForecastFactory _factory) : base(_factory) { }
 
         [Fact]

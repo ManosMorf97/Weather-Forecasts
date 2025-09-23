@@ -10,7 +10,7 @@ import CreateAccount from './CreateAccount.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
-  let current_page="CreateAccount"
+  let current_page="LogIn"
   useEffect(()=>{},[current_page]);
   if (current_page==="LogIn")
       return LogIn()

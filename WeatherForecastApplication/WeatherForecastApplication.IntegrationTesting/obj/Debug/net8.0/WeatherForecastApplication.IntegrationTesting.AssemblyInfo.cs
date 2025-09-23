@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WeatherForecastApplication.IntegrationTesting")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e603c72d2ce65cd442df2da4489b1b6d7962fa04")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9890c4723936282e767d3f1fcafd1e013ae8f0eb")]
 [assembly: System.Reflection.AssemblyProductAttribute("WeatherForecastApplication.IntegrationTesting")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WeatherForecastApplication.IntegrationTesting")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
