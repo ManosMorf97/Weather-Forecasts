@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.integrationtesting\\userauthenticationtesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|solutionrelative:weatherforecastapplication.integrationtesting\\userauthenticationtesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.web\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|solutionrelative:weatherforecastapplication.web\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.integrationtesting\\userauthenticationtesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|solutionrelative:weatherforecastapplication.integrationtesting\\userauthenticationtesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,8 +29,12 @@
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "AuthenticationController.cs",
               "DocumentMoniker": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Controllers\\AuthenticationController.cs",
               "RelativeDocumentMoniker": "WeatherForecastApplication.Web\\Controllers\\AuthenticationController.cs",
@@ -43,13 +47,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UserAuthenticationTesting.cs",
               "DocumentMoniker": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\UserAuthenticationTesting.cs",
               "RelativeDocumentMoniker": "WeatherForecastApplication.IntegrationTesting\\UserAuthenticationTesting.cs",
               "ToolTip": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\UserAuthenticationTesting.cs",
               "RelativeToolTip": "WeatherForecastApplication.IntegrationTesting\\UserAuthenticationTesting.cs",
-              "ViewState": "AgIAAPICAAAAAAAAAAAawAcDAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAOoCAAAAAAAAAAAawAkDAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-23T10:59:14.298Z",
               "EditorCaption": ""
@@ -57,10 +61,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             }
           ]
         }

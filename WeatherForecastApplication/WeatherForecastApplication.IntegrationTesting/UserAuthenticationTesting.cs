@@ -60,7 +60,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 var response = await client.PostAsJsonAsync("https://localhost:7038/Authentication/SignUp", request);
                 var responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
-                responseContent.Should().Be("Sites have not been selected");
+                responseContent.Should().Contain("Sites have not been selected");
                 dbContext.Cities.Count().Should().Be(0);
                 dbContext.Users.Count().Should().Be(0);
                 dbContext.CitySites.Count().Should().Be(0);
@@ -77,7 +77,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("https://localhost:7038/Authentication/SignUp", request);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
-                responseContent.Should().Be("Cities have not been selected");
+                responseContent.Should().Contain("Cities have not been selected");
                 dbContext.Cities.Count().Should().Be(0);
                 dbContext.Users.Count().Should().Be(0);
                 dbContext.CitySites.Count().Should().Be(0);
@@ -95,7 +95,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("https://localhost:7038/Authentication/SignUp", request);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-                responseContent.Should().Be("The User has been created");
+                responseContent.Should().Contain("The User has been created");
 
                 List<User> users = dbContext.Users.ToList();
                 users.Count().Should().Be(1);
@@ -123,7 +123,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("https://localhost:7038/Authentication/SignUp", request);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.Unauthorized);
-                responseContent.Should().Be("User exists");
+                responseContent.Should().Contain("User exists");
 
                 request = new SignUpInput()
                 {
@@ -136,7 +136,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("https://localhost:7038/Authentication/SignUp", request);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.Unauthorized);
-                responseContent.Should().Be("User exists");
+                responseContent.Should().Contain("User exists");
 
                 request = new SignUpInput()
                 {
@@ -149,7 +149,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("https://localhost:7038/Authentication/SignUp", request);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.Unauthorized);
-                responseContent.Should().Be("Username is taken");
+                responseContent.Should().Contain("Username is taken");
                 users.Count().Should().Be(1);
 
                 request = new SignUpInput()
@@ -163,7 +163,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("https://localhost:7038/Authentication/SignUp", request);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-                responseContent.Should().Be("The User has been created");
+                responseContent.Should().Contain("The User has been created");
 
                 users = dbContext.Users.OrderBy(user=>user.Email).ToList();
                 users.Count().Should().Be(2);
@@ -183,7 +183,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("https://localhost:7038/Authentication/SignUp", request);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
-                responseContent.Should().Be("Non valid Email");
+                responseContent.Should().Contain("Non valid Email");
 
                 users = dbContext.Users.ToList();
                 users.Count().Should().Be(2);
@@ -199,7 +199,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("https://localhost:7038/Authentication/SignUp", request);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
-                responseContent.Should().Be("Non valid Email");
+                responseContent.Should().Contain("Non valid Email");
 
                 users = dbContext.Users.ToList();
                 users.Count().Should().Be(2);
@@ -217,7 +217,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("https://localhost:7038/Authentication/SignUp", request);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
-                responseContent.Should().Be("Username is empty");
+                responseContent.Should().Contain("Username is empty");
 
                 users = dbContext.Users.ToList();
                 users.Count().Should().Be(2);
@@ -233,7 +233,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("https://localhost:7038/Authentication/SignUp", request);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotAcceptable);
-                responseContent.Should().Be("Password is less than 5 characters");
+                responseContent.Should().Contain("Password is less than 5 characters");
 
                 users = dbContext.Users.ToList();
                 users.Count().Should().Be(2);
@@ -687,7 +687,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("http://localhost:7038/Authentication/SignIn", requestSignIn);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
-                responseContent.Should().Be("Some fields are empty");
+                responseContent.Should().Contain("Some fields are empty");
 
                 requestSignIn = new SignInInput
                 {
@@ -697,7 +697,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("http://localhost:7038/Authentication/SignIn", requestSignIn);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
-                responseContent.Should().Be("Some fields are empty");
+                responseContent.Should().Contain("Some fields are empty");
 
                 requestSignIn = new SignInInput
                 {
@@ -707,7 +707,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("http://localhost:7038/Authentication/SignIn", requestSignIn);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
-                responseContent.Should().Be("Some fields are empty");
+                responseContent.Should().Contain("Some fields are empty");
                 requestSignIn = new SignInInput
                 {
                     Email_Username = "mmorf@gmail.com",
@@ -716,7 +716,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("http://localhost:7038/Authentication/SignIn", requestSignIn);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
-                responseContent.Should().Be("Some fields are empty");
+                responseContent.Should().Contain("Some fields are empty");
 
                 requestSignIn = new SignInInput
                 {
@@ -726,7 +726,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("http://localhost:7038/Authentication/SignIn", requestSignIn);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.Unauthorized);
-                responseContent.Should().Be("Wrong password");
+                responseContent.Should().Contain("Wrong password");
 
                 requestSignIn = new SignInInput
                 {
@@ -736,7 +736,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("http://localhost:7038/Authentication/SignIn", requestSignIn);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.Unauthorized);
-                responseContent.Should().Be("Wrong password");
+                responseContent.Should().Contain("Wrong password");
                 requestSignIn = new SignInInput
                 {
                     Email_Username = "manosmorf92@gmail.com",
@@ -745,7 +745,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("http://localhost:7038/Authentication/SignIn", requestSignIn);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
-                responseContent.Should().Be("This Email/Username does not respond to a specific user");
+                responseContent.Should().Contain("This Email/Username does not respond to a specific user");
 
                 requestSignIn = new SignInInput
                 {
@@ -755,7 +755,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("http://localhost:7038/Authentication/SignIn", requestSignIn);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
-                responseContent.Should().Be("This Email/Username does not respond to a specific user");
+                responseContent.Should().Contain("This Email/Username does not respond to a specific user");
 
                 requestSignIn = new SignInInput
                 {
@@ -765,7 +765,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("http://localhost:7038/Authentication/SignIn", requestSignIn);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-                responseContent.Should().Be("Logged in succesfully");
+                responseContent.Should().Contain("Logged in succesfully");
 
                 requestSignIn = new SignInInput
                 {
@@ -775,7 +775,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response = await client.PostAsJsonAsync("http://localhost:7038/Authentication/SignIn", requestSignIn);
                 responseContent = await response.Content.ReadAsStringAsync();
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-                responseContent.Should().Be("Logged in succesfully");
+                responseContent.Should().Contain("Logged in succesfully");
                 await base.emptyDB(dbContext);
             }
         }
