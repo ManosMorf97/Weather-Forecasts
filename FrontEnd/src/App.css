@@ -40,3 +40,11 @@
 .read-the-docs {
   color: #888 !important;
 }
+
+.alert-pos{
+    top:0px !important;
+    position: fixed;
+    width:100vw;
+    padding-left:0px;
+}
+

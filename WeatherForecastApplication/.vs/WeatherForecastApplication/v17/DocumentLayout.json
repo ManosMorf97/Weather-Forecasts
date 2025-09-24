@@ -40,7 +40,7 @@
               "RelativeDocumentMoniker": "WeatherForecastApplication.Web\\Controllers\\AuthenticationController.cs",
               "ToolTip": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Controllers\\AuthenticationController.cs",
               "RelativeToolTip": "WeatherForecastApplication.Web\\Controllers\\AuthenticationController.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAAABEAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAA1wBEAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-23T10:59:43.59Z",
               "EditorCaption": ""
@@ -55,8 +55,7 @@
               "RelativeToolTip": "WeatherForecastApplication.IntegrationTesting\\UserAuthenticationTesting.cs",
               "ViewState": "AgIAAOoCAAAAAAAAAAAawAkDAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T10:59:14.298Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-23T10:59:14.298Z"
             },
             {
               "$type": "Bookmark",

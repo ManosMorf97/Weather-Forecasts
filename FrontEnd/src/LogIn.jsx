@@ -1,6 +1,7 @@
 import './App.css'
 import './LogIn.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.min.css'
 import { useEffect, useState } from 'react'
 import MD5 from './md5.js'
@@ -10,12 +11,15 @@ function LogIn(){
     let [openEye,toggleEye]=useState(false)
     let [email_Username,setEmailUsername]=useState("");
     let [password,setPassword]=useState("");
+    let [answer,setAnswer]=useState(-1)
+
     var signIn=(e)=>{
+        setAnswer(0)
         e.preventDefault()
         console.log(password)
         let data={}
         data['email_Username']=email_Username
-        data['hashedPassword']=password
+        data['hashedPassword']=MD5(password)
         let current_url=url+'Authentication/SignIn'
         fetch(current_url,{
             method:'POST',
@@ -24,11 +28,20 @@ function LogIn(){
                 'Content-Type':'application/json'
             },
             body:JSON.stringify(data)
-        }).then(res=>{return res.json()}).
-        then(res=>console.log(res))
+        }).then( res=>{
+            setAnswer(res.status)
+            return res.json()})
+        .then(res=>{
+            console.log(res)
+        })
     }
     return (<>
         <div className="container">
+            <div className={"alert alert-dismissible alert-pos "+(answer>=200&&answer<300?"alert-success ":"alert-danger ")+
+                (answer==-1 || answer==0 ?"alert-non-displayed ":"")} role="alert">
+                HEY
+                <button className="btn-close" aria-label="close" data-bs-dismiss="alert"></button>
+            </div>
             <div className="central card-sm-1 card border-primary border-card background-card-color no-padding">
                 <h1 className="border-header-margin bg-primary margin-header">Log In</h1>
                 <div className="card-body  justify-content-center magrin-card ">
@@ -55,6 +68,7 @@ function LogIn(){
                 </div>
             </div>
         </div>
+
     </>)
 }
 
