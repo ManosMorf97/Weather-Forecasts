@@ -6,34 +6,32 @@ import 'bootstrap-icons/font/bootstrap-icons.min.css'
 import { useEffect, useState } from 'react'
 import MD5 from './md5.js'
 import url from './url.js'
-
+let i=0;
 function LogIn(){
     let [openEye,toggleEye]=useState(false)
     let [email_Username,setEmailUsername]=useState("");
     let [password,setPassword]=useState("");
     let [answer,setAnswer]=useState(-1)
 
-    var signIn=(e)=>{
-        setAnswer(0)
+    var signIn=async (e)=>{
         e.preventDefault()
         console.log(password)
         let data={}
         data['email_Username']=email_Username
         data['hashedPassword']=MD5(password)
         let current_url=url+'Authentication/SignIn'
-        fetch(current_url,{
+        let res=await fetch(current_url,{
             method:'POST',
             mode:'cors',
             headers: {
                 'Content-Type':'application/json'
             },
             body:JSON.stringify(data)
-        }).then( res=>{
-            setAnswer(res.status)
-            return res.json()})
-        .then(res=>{
-            console.log(res)
         })
+       
+        await setAnswer(a=>1*res.status)
+        console.log(answer)
+        console.log(await res.json())
     }
     return (<>
         <div className="container">

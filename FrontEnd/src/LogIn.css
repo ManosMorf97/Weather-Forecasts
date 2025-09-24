@@ -39,6 +39,7 @@ a{
     left:0px !important;
     position: absolute;
     padding-left:0px;
+    width:100vw;
 }
 .alert-non-displayed{
     display:none;
