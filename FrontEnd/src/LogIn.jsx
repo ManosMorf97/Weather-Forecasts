@@ -6,15 +6,19 @@ import 'bootstrap-icons/font/bootstrap-icons.min.css'
 import { useEffect, useState } from 'react'
 import MD5 from './md5.js'
 import url from './url.js'
+import Alert from './Alert.jsx'
+import LoadingSpinner from './LoadingSpinner.jsx'
 function LogIn(){
     let [openEye,toggleEye]=useState(false)
     let [email_Username,setEmailUsername]=useState("");
     let [password,setPassword]=useState("");
     let [response,setResponse]=useState(-1)
     let [message,setMessage]=useState("")
+    let [active,activate]=useState(false)
 
     var signIn=async (e)=>{
         e.preventDefault()
+        activate(ac=>!ac)
         console.log("NOW "+response)
         console.log(password)
         let data={}
@@ -34,16 +38,13 @@ function LogIn(){
         console.log(response)
         let res_message=await res.json()
         setMessage(()=>res_message)
+        activate(ac=>!ac)
 
     }
     return (<>
-        <div className="container">
-            <div className={"alert alert-dismissible alert-pos "+(response/200===1?"alert-success ":"alert-danger ")+
-                (response==-1 ?"alert-non-displayed ":"")} role="alert">
-                {message}
-                {//<button className="btn-close" aria-label="close" data-bs-dismiss="alert"></button>
-                }
-            </div>
+        <LoadingSpinner active={active}></LoadingSpinner>
+        <div className={(active?"non-displayed ":" ")+"container "}>
+            <Alert response={response} message={message}></Alert>
             <div className="central card-sm-1 card border-primary border-card background-card-color no-padding">
                 <h1 className="border-header-margin bg-primary margin-header">Log In</h1>
                 <div className="card-body  justify-content-center magrin-card ">
