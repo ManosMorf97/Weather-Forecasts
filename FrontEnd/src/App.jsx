@@ -5,18 +5,15 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import LogIn from './LogIn.jsx'
 import CreateAccount from './CreateAccount.jsx'
-
-
-
+let pages={'LogIn':<LogIn/>,
+           'CreateAccount':<CreateAccount/>
+}
 function App() {
   const [count, setCount] = useState(0)
-  let current_page="LogIn"
-  useEffect(()=>{},[current_page]);
-  if (current_page==="LogIn")
-      return LogIn()
-  if (current_page==="CreateAccount")
-    return CreateAccount()    
-  return (
+  let page="LogIn"
+  useEffect(()=>{},[page]);
+  return(pages[page])
+  /*return (
     <>
       <div>
         <a href="https://vite.dev" target="_blank">
@@ -39,7 +36,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  )*/
 }
 
 export default App

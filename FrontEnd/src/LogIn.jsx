@@ -8,13 +8,29 @@ import MD5 from './md5.js'
 import url from './url.js'
 import Alert from './Alert.jsx'
 import LoadingSpinner from './LoadingSpinner.jsx'
+import CreateAccount from './CreateAccount.jsx'
 function LogIn(){
+    let [page,setPage]=useState("LogIn")
+    
     let [openEye,toggleEye]=useState(false)
     let [email_Username,setEmailUsername]=useState("");
     let [password,setPassword]=useState("");
     let [response,setResponse]=useState(-1)
     let [message,setMessage]=useState("")
     let [active,activate]=useState(false)
+    useEffect(()=>{
+        toggleEye(false)
+        setEmailUsername("")
+        setPassword("")
+        setResponse(()=>-1)
+        setMessage("")
+        activate(()=>false)
+    },[page]
+    )
+    
+    if (page=="CreateAccount"){
+        return (<CreateAccount></CreateAccount>)
+    }
 
     var signIn=async (e)=>{
         e.preventDefault()
@@ -67,7 +83,7 @@ function LogIn(){
                         <input type="submit" className="bg-primary" value="LogIn" />
                         <br></br>
                         <br></br>
-                        <a href="#">Don't have an account. Sign Up</a>
+                        <a href='#' onClick={()=>{setPage("CreateAccount");}}>Don't have an account. Sign Up</a>
                     </form>
                 </div>
             </div>
