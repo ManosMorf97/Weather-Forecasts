@@ -19,7 +19,7 @@ function LogIn(){
         console.log(password)
         let data={}
         data['email_Username']=email_Username
-        data['hashedPassword']=password
+        data['hashedPassword']=MD5(password)
         let current_url=url+'Authentication/SignIn'
         let res=await fetch(current_url,{
             method:'POST',
