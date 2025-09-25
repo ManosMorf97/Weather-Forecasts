@@ -6,19 +6,20 @@ import 'bootstrap-icons/font/bootstrap-icons.min.css'
 import { useEffect, useState } from 'react'
 import MD5 from './md5.js'
 import url from './url.js'
-let i=0;
 function LogIn(){
     let [openEye,toggleEye]=useState(false)
     let [email_Username,setEmailUsername]=useState("");
     let [password,setPassword]=useState("");
-    let [answer,setAnswer]=useState(-1)
+    let [response,setResponse]=useState(-1)
+    let [message,setMessage]=useState("")
 
     var signIn=async (e)=>{
         e.preventDefault()
+        console.log("NOW "+response)
         console.log(password)
         let data={}
         data['email_Username']=email_Username
-        data['hashedPassword']=MD5(password)
+        data['hashedPassword']=password
         let current_url=url+'Authentication/SignIn'
         let res=await fetch(current_url,{
             method:'POST',
@@ -29,16 +30,19 @@ function LogIn(){
             body:JSON.stringify(data)
         })
        
-        await setAnswer(a=>1*res.status)
-        console.log(answer)
-        console.log(await res.json())
+        setResponse(()=>1*res.status)
+        console.log(response)
+        let res_message=await res.json()
+        setMessage(()=>res_message)
+
     }
     return (<>
         <div className="container">
-            <div className={"alert alert-dismissible alert-pos "+(answer>=200&&answer<300?"alert-success ":"alert-danger ")+
-                (answer==-1 || answer==0 ?"alert-non-displayed ":"")} role="alert">
-                HEY
-                <button className="btn-close" aria-label="close" data-bs-dismiss="alert"></button>
+            <div className={"alert alert-dismissible alert-pos "+(response/200===1?"alert-success ":"alert-danger ")+
+                (response==-1 ?"alert-non-displayed ":"")} role="alert">
+                {message}
+                {//<button className="btn-close" aria-label="close" data-bs-dismiss="alert"></button>
+                }
             </div>
             <div className="central card-sm-1 card border-primary border-card background-card-color no-padding">
                 <h1 className="border-header-margin bg-primary margin-header">Log In</h1>
@@ -46,13 +50,14 @@ function LogIn(){
                     <form className="form" onSubmit={(e)=>signIn(e)}>
                         <p className="s-0">
                            <label htmlFor="EmailUsername" >Enter Email/Username </label><br></br>
-                            <input type="text" id="EmailUsername" onChange={(e)=>setEmailUsername(e.target.value)}value={email_Username} className="bg-white text-dark" />    
+                            <input type="text" id="EmailUsername" onChange={(e)=>{setEmailUsername(e.target.value); setResponse(()=>-1)}}
+                            value={email_Username} className="bg-white text-dark" />    
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </p> 
                         <p className="s-0">
                             <label htmlFor="Password">Enter Password </label><br></br>
                             <input type={openEye?"text":"password"} id="Password"  value={password} 
-                            onChange={(e)=>setPassword(e.target.value)}
+                            onChange={(e)=>{setPassword(e.target.value); setResponse(()=>-1)}}
                             className="bg-white text-dark" />
                             <i className={openEye? "bi bi-eye":"bi bi-eye-slash"} id="togglePassword"
                             onClick={()=>toggleEye(ope=>!ope)}></i>
