@@ -9,7 +9,7 @@ import {Link} from "react-router-dom"
 function CreateAccount(){
     //let [openEye,toggleEye]=useState(false)
     return (<>
-        <div className="background-card-color ">
+        <div className="container">
             <div className="central background-card-color no-padding">
                 <h1 className="alert-pos bg-primary">Create Account</h1>
                 <div className="justify-content-center ">
