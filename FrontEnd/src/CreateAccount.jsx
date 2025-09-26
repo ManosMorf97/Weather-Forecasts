@@ -11,7 +11,7 @@ function CreateAccount(){
     return (<>
         <div className="container">
             <div className="central background-card-color no-padding">
-                <h1 className="alert-pos bg-primary">Create Account</h1>
+                <h1 className="top-cover bg-primary">Create Account</h1>
                 <div className="justify-content-center ">
                     <form className="form">
                         <p className="s-0">
@@ -35,6 +35,7 @@ function CreateAccount(){
                         <input type="submit" className="bg-primary" value="Create Account" />
                         <br></br>
                         <br></br>
+                        
                         <Link to="/">Already have an account. Sign In</Link>
                     </form>
                 </div>
