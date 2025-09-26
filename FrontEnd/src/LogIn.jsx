@@ -1,4 +1,6 @@
+
 import './App.css'
+import './styles.css'
 import './LogIn.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
@@ -9,28 +11,14 @@ import url from './url.js'
 import Alert from './Alert.jsx'
 import LoadingSpinner from './LoadingSpinner.jsx'
 import CreateAccount from './CreateAccount.jsx'
+import {Link} from "react-router-dom"
 function LogIn(){
-    let [page,setPage]=useState("LogIn")
-    
     let [openEye,toggleEye]=useState(false)
     let [email_Username,setEmailUsername]=useState("");
     let [password,setPassword]=useState("");
     let [response,setResponse]=useState(-1)
     let [message,setMessage]=useState("")
     let [active,activate]=useState(false)
-    useEffect(()=>{
-        toggleEye(false)
-        setEmailUsername("")
-        setPassword("")
-        setResponse(()=>-1)
-        setMessage("")
-        activate(()=>false)
-    },[page]
-    )
-    
-    if (page=="CreateAccount"){
-        return (<CreateAccount></CreateAccount>)
-    }
 
     var signIn=async (e)=>{
         e.preventDefault()
@@ -83,7 +71,7 @@ function LogIn(){
                         <input type="submit" className="bg-primary" value="LogIn" />
                         <br></br>
                         <br></br>
-                        <a href='#' onClick={()=>{setPage("CreateAccount");}}>Don't have an account. Sign Up</a>
+                        <Link to='/createAccount'>Don't have an account. Sign Up</Link>
                     </form>
                 </div>
             </div>

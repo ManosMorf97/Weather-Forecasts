@@ -1,5 +1,5 @@
 #root {
-   max-width:  1280px !important;
+  max-width:  1280px !important;
   margin: 0 auto !important;
   padding: 2rem !important;
   text-align: center !important;
@@ -33,10 +33,4 @@
   }
 }
 
-.card {
-  padding: 2em !important;
-}
 
-.read-the-docs {
-  color: #888 !important;
-}
