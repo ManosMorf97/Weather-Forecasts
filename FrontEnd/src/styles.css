@@ -8,10 +8,6 @@ input{
 .background-card-color{
     background-color: rgb(245, 243, 243);
 }
-h1{
-    margin-bottom:6vh;
-    z-index:2;
-}
 .border-header-margin{
     margin-bottom: 1vh;
 }

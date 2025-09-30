@@ -2,11 +2,13 @@ import './App.css'
 import './styles.css'
 import './CreateAccount.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.min.css'
 import {Link} from "react-router-dom"
 import { useState } from 'react'
 //import { useState } from 'react'
 import API_KEY from "./cityApi.js"
+import  Alert from './Alert.jsx'
 
 function CreateAccount(){
     //let [openEye,toggleEye]=useState(false)
@@ -19,15 +21,19 @@ function CreateAccount(){
     //fetch(city_url).then((res)=>console.log(res.json()))
     let [city_res,setCityRes]=useState("Athens")
     let [theirCities,setTheirCities]=useState([])
-    let jsxTheirCities=theirCities.map(x=><option 
-        onClick={()=>setTheirCities([...theirCities,x])}key={x}>{x}</option>)
+    let jsxTheirCities=theirCities.map(x=><li key={x}>{x}</li>)
+    /*let [response,setResponse]=useState(-1)
+    let [message,setMessage]=useState("")*/
+    let [response,setResponse]=useState({status:-1,message:"hello world"})
+
 
     return (<>
         <div className="container">
+            <Alert response={response.status} message={response.message} ></Alert>
             <div className="central background-card-color no-padding">
-                <h1 className="top-cover bg-primary">Create Account</h1>
+                <h1 className="top-cover bg-primary z-1">Create Account</h1>
                 <div className="justify-content-center ">
-                    <form className="form">
+                    <form className="form justify-content-center" >
                         <p className="s-0">
                            <label htmlFor="Email" >Enter Email </label><br></br>
                             <input type="email" id="Emai" className="bg-white text-dark" />    
@@ -55,12 +61,31 @@ function CreateAccount(){
                             {jsxTheirForecasts}
                         </ul>
                         <br></br>
-                        <label htmlFor="Cities">Choose Cities</label>
-                        <select id="cities"  defaultValue="--type interesting cities--"onChange=
-                        {(e)=>{console.log(e.target.value);fetch(city_url+e.target.value).then((res)=>console.log(res.json()))}}>
-                            <option disabled value="--type interesting cities--" >--type interesting cities--</option>
-                            <option key={city_res}>{city_res}</option>
-                        </select>
+                        <label htmlFor="city">Choose Cities</label><br></br>
+                        <input id="city"  type="text" placeholder="Type Cities you like" className="bg-white text-dark" onChange={()=>{
+                            if (response.status!==-1){
+                                setResponse({...response,status:-1,message:"hello world"})
+                                console.log(response.status)
+                            }
+                                
+                        }}/>
+                        <br/>
+                        <button onClick={async (e)=>{
+                            e.preventDefault()
+                            let res=await fetch(city_url+document.getElementById("city").value)
+                            let city=await res.json()
+                            if(city[0]===undefined){
+                                setResponse(resp=>({...res,status:0,message:"That city does not exist or is not available"}))
+                                //setResponse(0) 
+                                //setMessage("That city does not exist or it is not available")
+                                console.log(response)
+                            }
+                            else{
+                                setTheirCities([...theirCities,city[0].name]);
+                                document.getElementById("city").value=""
+                            }
+                          
+                        }}>Add City</button>
                         <ul>
                             {jsxTheirCities}
                         </ul>

@@ -1,16 +1,14 @@
-
 import './App.css'
 import './styles.css'
 import './LogIn.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.min.css'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import MD5 from './md5.js'
 import url from './url.js'
 import Alert from './Alert.jsx'
 import LoadingSpinner from './LoadingSpinner.jsx'
-import CreateAccount from './CreateAccount.jsx'
 import {Link} from "react-router-dom"
 function LogIn(){
     let [openEye,toggleEye]=useState(false)
