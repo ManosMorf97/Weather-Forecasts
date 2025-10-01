@@ -180,10 +180,11 @@ namespace WeatherForecastApplication.Web.Controllers
             return usersitecity_results.Select(res => new UserSiteCityNames(res.Email,res.City_name, res.Site_name)).ToList();
         }
         [HttpPost]
-        public async Task<JsonResult> GetMyEmail(string? username)
+        public async Task<JsonResult> GetMyEmail([FromBody] string? Username)
         {
-            var User = await weatherAppDbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
-            return new JsonResult(User?.Email);
+            Debug.WriteLine(Username);
+            var user = await weatherAppDbContext.Users.FirstOrDefaultAsync(u => u.Username.Equals(Username));
+            return new JsonResult(user?.Email);
         }
 
     }
