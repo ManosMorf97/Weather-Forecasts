@@ -40,6 +40,7 @@ function LogIn(){
         console.log(response)
         let res_message=await res.json()
         setMessage(()=>res_message)
+        localStorage.setItem("UserLoggedIn",email_Username)
         activate(ac=>!ac)
 
     }

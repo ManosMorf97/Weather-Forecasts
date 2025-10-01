@@ -179,7 +179,12 @@ namespace WeatherForecastApplication.Web.Controllers
                     OrderBy(res => res.Email).ThenBy(res => res.City_name).ThenBy(res => res.Site_name).ToList();
             return usersitecity_results.Select(res => new UserSiteCityNames(res.Email,res.City_name, res.Site_name)).ToList();
         }
-
+        [HttpPost]
+        public async Task<JsonResult> GetMyEmail(string? username)
+        {
+            var User = await weatherAppDbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
+            return new JsonResult(User?.Email);
+        }
 
     }
  }
