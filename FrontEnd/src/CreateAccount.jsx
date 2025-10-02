@@ -4,7 +4,7 @@ import './CreateAccount.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.min.css'
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import { useState } from 'react'
 import MD5 from './md5.js'
 import url from './url.js'
@@ -15,7 +15,7 @@ import LoadingSpinner from './LoadingSpinner.jsx'
 
 function CreateAccount(){
     //let [openEye,toggleEye]=useState(false)
-    
+    let navigate=useNavigate()
     let forecasts=["VisualCorssing","AccuWeather","WeatherApi","WeatherBit","Meteo"]
     let [active,activate]=useState(false)
     let [email,setEmail]=useState("")
@@ -65,6 +65,11 @@ function CreateAccount(){
         let res_message=await res.json()
         setResponse({...response,status:res.status,message:res_message})
         activate(ac=>!ac)
+        if (res.status==200){
+            
+            navigate("/logIn")
+        }
+            
     }
 
     return (<>

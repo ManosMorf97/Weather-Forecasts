@@ -6,6 +6,7 @@ import viteLogo from '/vite.svg'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import LogIn from './LogIn.jsx'
 import CreateAccount from './CreateAccount.jsx'
+import Home from './Home.jsx'
 let pages={'LogIn':<LogIn/>,
            'CreateAccount':<CreateAccount/>
 }
@@ -13,13 +14,15 @@ function App() {
   const [count, setCount] = useState(0)
   let page="LogIn"
   useEffect(()=>{},[page]);
+
   //return(pages[page])
   return (
     <>
     <Router>
       <Routes>
         <Route path="/createAccount" element={<CreateAccount/>} />
-        <Route path="/" element={<LogIn/>}/>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/logIn" element={<LogIn/>} />
       </Routes>
     </Router>
     </>

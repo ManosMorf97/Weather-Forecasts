@@ -9,8 +9,9 @@ import MD5 from './md5.js'
 import url from './url.js'
 import Alert from './Alert.jsx'
 import LoadingSpinner from './LoadingSpinner.jsx'
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 function LogIn(){
+    let navigate=useNavigate()
     let [openEye,toggleEye]=useState(false)
     let [email_Username,setEmailUsername]=useState("");
     let [password,setPassword]=useState("");
@@ -59,9 +60,12 @@ function LogIn(){
         console.log(response)
         let res_message=await res.json()
         if (res.status==200)
-            storeUser(url)
+            await storeUser(url)
         setMessage(()=>res_message)
         activate(ac=>!ac)
+        if(res.status==200)
+            navigate("/")
+        
 
     }
     return (<>
