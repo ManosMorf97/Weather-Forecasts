@@ -18,6 +18,25 @@ function LogIn(){
     let [message,setMessage]=useState("")
     let [active,activate]=useState(false)
 
+    var storeUser=async (url)=>{
+        if(email_Username.includes("@")){
+            localStorage.setItem("UserLoggedIn",email_Username)
+            return
+        } 
+        var res= await fetch(url+'Authentication/GetMyEmail',{
+            method: "POST",
+            mode:"cors",
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(email_Username)
+        })
+        let email=await res.json()
+        localStorage.setItem("UserLoggedIn",email)
+        
+
+    }
+
     var signIn=async (e)=>{
         e.preventDefault()
         activate(ac=>!ac)
@@ -39,8 +58,9 @@ function LogIn(){
         setResponse(()=>1*res.status)
         console.log(response)
         let res_message=await res.json()
+        if (res.status==200)
+            storeUser(url)
         setMessage(()=>res_message)
-        localStorage.setItem("UserLoggedIn",email_Username)
         activate(ac=>!ac)
 
     }

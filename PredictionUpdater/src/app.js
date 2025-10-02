@@ -447,7 +447,7 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         
     //WeatherApi("Athens","2025-8-1",APK.VisualCrossing_API_KEY)
 }
-//main(WeatherPredictions,callbackDate)
+main(WeatherPredictions,callbackDate)
 module.exports.main=main;
 
 

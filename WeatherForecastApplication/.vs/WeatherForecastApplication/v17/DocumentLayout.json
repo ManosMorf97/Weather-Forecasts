@@ -54,8 +54,7 @@
               "RelativeToolTip": "WeatherForecastApplication.Web\\Controllers\\SuggestionsController.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T11:22:09.856Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-01T11:22:09.856Z"
             },
             {
               "$type": "Document",
@@ -67,8 +66,7 @@
               "RelativeToolTip": "WeatherForecastApplication.Web\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-01T08:50:23.644Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-01T08:50:23.644Z"
             },
             {
               "$type": "Document",
@@ -78,7 +76,7 @@
               "RelativeDocumentMoniker": "WeatherForecastApplication.Web\\Controllers\\AuthenticationController.cs",
               "ToolTip": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Controllers\\AuthenticationController.cs",
               "RelativeToolTip": "WeatherForecastApplication.Web\\Controllers\\AuthenticationController.cs",
-              "ViewState": "AgIAAK4AAAAAAAAAAAAAALYAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-23T10:59:43.59Z",
               "EditorCaption": ""
@@ -93,8 +91,7 @@
               "RelativeToolTip": "WeatherForecastApplication.IntegrationTesting\\UserAuthenticationTesting.cs",
               "ViewState": "AgIAAAEDAAAAAAAAAAAAAAkDAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T10:59:14.298Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-23T10:59:14.298Z"
             }
           ]
         }
