@@ -257,12 +257,20 @@ async function main(callback,callbackDate){
         
         let timeslots=await model.Timeslots.findAll({//for next predictions no past
             where:{
-                date:{
-                    [model.Sequelize.Op.gte]:CreateSQLDate(today)
+                [model.Sequelize.Op.or]:[{
+                    date:{
+                        [model.Sequelize.Op.gt]:CreateSQLDate(today)
+                    }
                 },
-                time:{
-                    [model.Sequelize.Op.gte]:CreateSQLTime(today)
-                },
+                {
+                    
+                        date:{
+                            [model.Sequelize.Op.eq]:CreateSQLDate(today)
+                        },time:{
+                            [model.Sequelize.Op.gte]:CreateSQLTime(today)
+                        }
+                    
+                }]
             },
              order:[
                     ["Date","ASC"],
@@ -287,6 +295,8 @@ async function main(callback,callbackDate){
         for(const ts of timeslots){
             HashDateTimes[ts.Date][ts.Time]=ts
         }
+                for (const day in HashDateTimes)
+                console.log(HashDateTimes[day])
 
         let citySites=await model.CitySites.findAll({raw:true,transaction:transaction})
         let [predictions,notifications]=BringCurrentPredictionsNotifications(citySites,timeslots,HashCities,HashSites,HashDateTimes,callback)
@@ -324,10 +334,11 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         console.log(JSON.stringify(responsejson.days[0].hours[23]).length)
     }
 
-    async function AccuWeather(location,dates,city_id,site_id,HashDateTimes){// all day same weather
+    /*async function AccuWeather(location,dates,city_id,site_id,HashDateTimes){// all day same weather
         let predictions=[]
         let lengthsub="YYYY-MM-DD".length
         let API_KEY=APK.AccuWeather_API_KEY
+        console.log("TTTT"+API_KEY)
         let response=await fetch(`http://dataservice.accuweather.com/locations/v1/cities/search`+
             `?apikey=${API_KEY}&q=${location}`,{headers:{ 'accept':'application/json'}})
         let responsejson=await response.json();
@@ -347,21 +358,22 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         }
         let alerts=[];
         return {predictions,alerts}
-    }
+    }*/
     //AccuWeather('Athens','2025-8-1',APK.AccuWeather_API_KEY)
     async function WeatherApi(location,dates,city_id,site_id,HashDateTimes){// next two days keep me
         let lengthsub="YYYY-MM-DD ".length
         let alerts=[]
+        let predictions=[]
         let API_KEY=APK.Weatherapi_API_KEY
         let response=await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}`+
             `&days=3&aqi=yes&alerts=yes`,{headers:{ 'accept':'application/json'}})
         let responsejson=await response.json();
         let alertsFromAPI=responsejson.alerts.alert
-        let forecastday=responsejson.forecastday///CHECK THIS
+        let forecastday=responsejson.forecast.forecastday///CHECK THIS
         for(const day of forecastday.slice(0,3)){
             let hour_forecasts=[day.hour[8],day.hour[15],day.hour[21]]
             for(const hour_forecast of hour_forecasts){
-                let time=hour_forecast.hour.time
+                let time=hour_forecast.time
                 predictions.push({"City_Id":city_id,"Site_Id":site_id,
                 "Timeslot_Id":HashDateTimes[day.date][time.substring(lengthsub,time.length)].timeslot_id,"Weather":hour_forecast,"Danger":responsejson.alerts.alert.length>0})
                 for(let alertAPI of alertsFromAPI){
