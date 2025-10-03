@@ -223,7 +223,7 @@ async function DeleteNoNeededNotifications(transaction){
     await model.sequelize.query(`delete notif from Notifications notif join Predictions p on `+ 
         `notif.Site_Id=p.Site_Id and notif.City_Id=p.City_Id and notif.Timeslot_Id=p.Timeslot_Id and p.Danger='false'`,{transaction:transaction})
 }
-var main=async function(callback,callbackDate){
+async function main(callback,callbackDate){
     let transaction= await model.sequelize.transaction()
     console.log("TRANS "+transaction)
     let today=callbackDate()
@@ -289,7 +289,7 @@ var main=async function(callback,callbackDate){
     
 }
 //main(WeatherPredictions,callbackDate)
-module.exports.main=main;
+module.exports={main};
 
 
 /*
