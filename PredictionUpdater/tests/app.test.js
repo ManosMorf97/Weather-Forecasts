@@ -1,4 +1,4 @@
-jest.setTimeout(140000)
+jest.setTimeout(90000)
 let app=require('../src/app')
 let model=require('../src/models')
 let City_rows=null
