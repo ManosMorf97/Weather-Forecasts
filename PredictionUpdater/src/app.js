@@ -295,8 +295,7 @@ async function main(callback,callbackDate){
         for(const ts of timeslots){
             HashDateTimes[ts.Date][ts.Time]=ts
         }
-                for (const day in HashDateTimes)
-                console.log(HashDateTimes[day])
+
 
         let citySites=await model.CitySites.findAll({raw:true,transaction:transaction})
         let [predictions,notifications]=BringCurrentPredictionsNotifications(citySites,timeslots,HashCities,HashSites,HashDateTimes,callback)
@@ -324,11 +323,11 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         for (const day of [response.days[0],response.days[1],response.days[2]]){
             for (const timeweather of [response.hours[8],responsehours.hours[15],day.hours[21]]){
                 predictions.push({"City_Id":city_id,"Site_Id":site_id,
-                "Timeslot_Id":HashDateTimes[day.datetime][timeweather.datetime].timeslot_id,"Weather":timeweather,"Danger":false})
+                "Timeslot_Id":HashDateTimes[day.datetime][timeweather.datetime].Timeslot_Id,"Weather":timeweather,"Danger":false})
             }
         }
         let alerts=[]
-        return {predictions,alerts}
+        return [predictions,alerts]
         console.log(responsejson)
         return responsejson
         console.log(JSON.stringify(responsejson.days[0].hours[23]).length)
@@ -370,21 +369,35 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         let responsejson=await response.json();
         let alertsFromAPI=responsejson.alerts.alert
         let forecastday=responsejson.forecast.forecastday///CHECK THIS
+        for (const day in HashDateTimes)
+            for(const time in HashDateTimes[day])
+                console.log(HashDateTimes[day][time].Date+" "+HashDateTimes[day][time].Time)
         for(const day of forecastday.slice(0,3)){
             let hour_forecasts=[day.hour[8],day.hour[15],day.hour[21]]
             for(const hour_forecast of hour_forecasts){
                 let time=hour_forecast.time
-                predictions.push({"City_Id":city_id,"Site_Id":site_id,
-                "Timeslot_Id":HashDateTimes[day.date][time.substring(lengthsub,time.length)].timeslot_id,"Weather":hour_forecast,"Danger":responsejson.alerts.alert.length>0})
+                let Timeslot=HashDateTimes[day.date][time.substring(lengthsub,time.length)+":00"]
+                if(Timeslot==null)
+                    continue
+                console.log("DT "+day.date+" "+time.substring(lengthsub,time.length)+":00")
+                let prediction={}
+                prediction["City_Id"]=city_id
+                prediction["Site_Id"]=site_id
+                prediction["Timeslot_Id"]=Timeslot.Timeslot_Id
+                prediction["Weather"]=hour_forecast
+                prediction["Danger"]=responsejson.alerts.alert>0
+                predictions.push(prediction)
+                console.log(prediction)
                 for(let alertAPI of alertsFromAPI){
-                    if(!responsejson.location.region in alertAPI.areas)
+                    if(!alertAPI.areas.includes(responsejson.location.region))
                         continue
                     let today=new Date()
                     CreateAlert(today,alerts,day,time,true)
                 }
             }
         }
-        return {predictions,alerts}
+        console.log(alerts.length)
+        return [predictions,alerts]
         console.log(responsejson.forecast.forecastday[0].hour[0])
         console.log(responsejson.alerts.alert)
         
@@ -404,19 +417,20 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         for(const date of HashDateTimes.Keys()){
             for( const time of HashDateTimes.Keys()){
                 predictions.push({"City_Id":city_id,"Site_Id":site_id,
-                "Timeslot_Id":HashDateTimes[date][time].timeslot_id,"Weather":responsejson.data[0],"Danger":responsealertjson.alerts.length>0})
+                "Timeslot_Id":HashDateTimes[date][time].Timeslot_Id,"Weather":responsejson.data[0],"Danger":responsealertjson.alerts.length>0})
                 for(const alertAPI of alertsAPI){
                     let today=new Date();
                     CreateAlert(today,date,time,alerts,false)
                 }
             }
         }
-        return {predictions,alerts}
+        return [predictions,alerts]
         console.log(responsejson.data[0])
     }
 
     async function OpenMeteo(location,dates,city_id,site_id,HashDateTimes){
         let predictions=[]
+        let alerts=[]
          let response=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}`
             ,{headers:{ 'accept':'application/json'}})
         let responsejson=await response.json();
@@ -438,9 +452,9 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             let date=datetime.substring(0,datetime.indexOf("T"))
             let time=datetime.substring(datetime.indexOf("T")+1)
             predictions.push({"City_Id":city_id,"Site_Id":site_id,
-                "Timeslot_Id":HashDateTimes[date][time].timeslot_id,"Weather":temperature[index]+"C","Danger":false})
+                "Timeslot_Id":HashDateTimes[date][time].Timeslot_Id,"Weather":temperature[index]+"C","Danger":false})
         }
-
+        return [predictions,alerts]
         console.log(responselocjson.hourly.temperature_2m[0])
     }
     switch (site){

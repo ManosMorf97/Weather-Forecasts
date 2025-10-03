@@ -1,4 +1,4 @@
-jest.setTimeout(90000)
+jest.setTimeout(140000)
 let app=require('../src/app')
 let model=require('../src/models')
 let City_rows=null
@@ -22,6 +22,10 @@ let changerTestCase2=(Site_Name,City_Name,date,hour)=>{
     return ""
 }
 beforeEach(async ()=>{
+    await model.Users.destroy({where:{}})
+    await model.Cities.destroy({where:{}})
+    await model.Sites.destroy({where:{}})
+    await model.Timeslots.destroy({where:{}})
     City_rows=null
     Site_rows=null
     site_names=null
@@ -70,6 +74,7 @@ test("Testing Case 1",async ()=>{
     let timeslots=[]
     let today=new Date()
     today.setFullYear(2023,3,20)
+    console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"+today.getHours())
     for(let i=0; i<3; i++){
         for(let j=0; j<3; j++){
             timeslots.push({Date:CreateSQLDate(today),Time:hours[j]})
