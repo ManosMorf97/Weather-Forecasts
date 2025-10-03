@@ -1,5 +1,5 @@
 jest.setTimeout(90000)
-let app=require('../src/app')
+let predictor=require('../src/predictor')
 let model=require('../src/models')
 let City_rows=null
 let Site_rows=null
@@ -22,10 +22,10 @@ let changerTestCase2=(Site_Name,City_Name,date,hour)=>{
     return ""
 }
 beforeEach(async ()=>{
-    await model.Users.destroy({where:{}})
+   /* await model.Users.destroy({where:{}})
     await model.Cities.destroy({where:{}})
     await model.Sites.destroy({where:{}})
-    await model.Timeslots.destroy({where:{}})
+    await model.Timeslots.destroy({where:{}})*/
     City_rows=null
     Site_rows=null
     site_names=null
@@ -133,7 +133,7 @@ test("Testing Case 1",async ()=>{
     let callbackDate=()=>{
         return new Date(2023,3,20,0,0,23)
     }
-    await app.main(callback,callbackDate)
+    await predictor.main(callback,callbackDate)
     let results=await model.sequelize.query(`select c.City_name,s.Site_name,t.Date,CONVERT(VARCHAR(8), t.Time, 108) AS Time`+
         `,p.Weather,p.Danger from Predictions p `+
         `join CitySites cs on p.Site_Id=cs.Site_Id `+
@@ -231,7 +231,7 @@ test("Testing Case 2",async ()=>{
     let callbackDate=()=>{
         return new Date(2023,3,20,0,0,23)
     }
-    await app.main(callback,callbackDate)
+    await predictor.main(callback,callbackDate)
     let results=await model.sequelize.query(`select c.City_name,s.Site_name,t.Date,CONVERT(VARCHAR(8), t.Time, 108) AS Time`+
         `,p.Weather,p.Danger from Predictions p `+
         `join CitySites cs on p.Site_Id=cs.Site_Id `+
@@ -330,7 +330,7 @@ test("Testing Case 3",async ()=>{
     let callbackDate=()=>{
         return new Date(2023,3,20,0,0,23)
     }
-    await app.main(callback,callbackDate)
+    await predictor.main(callback,callbackDate)
     let results=await model.sequelize.query(`select c.City_name,s.Site_name,t.Date,CONVERT(VARCHAR(8), t.Time, 108) AS Time`+
         `,p.Weather,p.Danger from Predictions p `+
         `join CitySites cs on p.Site_Id=cs.Site_Id `+
@@ -463,7 +463,7 @@ test("Testing Case 4",async ()=>{
     let callbackDate=()=>{
         return new Date(2023,3,20,0,0,23)
     }
-    await app.main(callback,callbackDate)
+    await predictor.main(callback,callbackDate)
     let results=await model.sequelize.query(`select c.City_name,s.Site_name,t.Date,CONVERT(VARCHAR(8), t.Time, 108) AS Time`+
         `,p.Weather,p.Danger from Predictions p `+
         `join CitySites cs on p.Site_Id=cs.Site_Id `+
@@ -578,7 +578,7 @@ test("Testing Case 5",async ()=>{
     let callbackDate=()=>{
         return new Date(2023,3,20,0,0,23)
     }
-    await app.main(callback,callbackDate)
+    await predictor.main(callback,callbackDate)
     let results=await model.sequelize.query(`select c.City_name,s.Site_name,t.Date,CONVERT(VARCHAR(8), t.Time, 108) AS Time`+
         `,p.Weather,p.Danger from Predictions p `+
         `join CitySites cs on p.Site_Id=cs.Site_Id `+
@@ -723,7 +723,7 @@ test("Testing Case 6",async ()=>{
     let callbackDate=()=>{
         return new Date(2023,3,20,0,0,23)
     }
-    await app.main(callback,callbackDate)
+    await predictor.main(callback,callbackDate)
     let results=await model.sequelize.query(`select c.City_name,s.Site_name,t.Date,CONVERT(VARCHAR(8), t.Time, 108) AS Time`+
         `,p.Weather,p.Danger from Predictions p `+
         `join CitySites cs on p.Site_Id=cs.Site_Id `+
@@ -881,7 +881,7 @@ test("Testing Case 7",async ()=>{
     let callbackDate=()=>{
         return new Date(2023,3,20,0,0,23)
     }
-    await app.main(callback,callbackDate)
+    await predictor.main(callback,callbackDate)
     let results=await model.sequelize.query(`select c.City_name,s.Site_name,t.Date,CONVERT(VARCHAR(8), t.Time, 108) AS Time`+
         `,p.Weather,p.Danger from Predictions p `+
         `join CitySites cs on p.Site_Id=cs.Site_Id `+
@@ -1038,7 +1038,7 @@ test("Testing Case 8",async ()=>{
     let callbackDate=()=>{
         return new Date(2023,3,20,0,0,23)
     }
-    await app.main(callback,callbackDate)
+    await predictor.main(callback,callbackDate)
     let results=await model.sequelize.query(`select c.City_name,s.Site_name,t.Date,CONVERT(VARCHAR(8), t.Time, 108) AS Time`+
         `,p.Weather,p.Danger from Predictions p `+
         `join CitySites cs on p.Site_Id=cs.Site_Id `+
