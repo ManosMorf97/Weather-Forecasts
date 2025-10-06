@@ -166,20 +166,24 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         let longitude=GeoPos.longitude
         let indexes=[8,15,21]
         for(let i=1; i<=2; i++)
-            for(let j=0; j<4; j++)
+            for(let j=0; j<3; j++)
                 indexes.push(indexes[j]+24*i)
-        console.log(responsejson)
         let responseloc=await fetch(`https://api.open-meteo.com/v1/forecast?`+
             `latitude=${latitude}&longitude=${longitude}`+
             `&hourly=temperature_2m&forecast_days=3`,{headers:{ 'accept':'application/json'}})
         let responselocjson=await responseloc.json();
+        console.log(responselocjson)
         let temperature=responselocjson.hourly.temperature_2m
         for(const index of indexes){
             let datetime=responselocjson.hourly.time[index]
+            console.log(datetime)
             let date=datetime.substring(0,datetime.indexOf("T"))
             let time=datetime.substring(datetime.indexOf("T")+1)
+            let Timeslot=HashDateTimes[date][time+"00"]
+            if(Timeslot==null)
+                continue
             predictions.push({"City_Id":city_id,"Site_Id":site_id,
-                "Timeslot_Id":HashDateTimes[date][time].Timeslot_Id,"Weather":temperature[index]+"C","Danger":false})
+                "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":temperature[index]+"C","Danger":false})
         }
         return [predictions,alerts]
         console.log(responselocjson.hourly.temperature_2m[0])
