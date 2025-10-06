@@ -3,6 +3,16 @@ let predictor=require("./predictor");
 function callbackDate(){
     return new Date()
 }
+function InsideRange(begin_date,end_date,begin_time,end_time,day,hour){
+    let date_Start=new Date(begin_date+"T"+begin_time)
+    let date_Ending=new Date(end_date+"T"+end_time)
+    let Date_to_Check=new Date(day+"T"+hour)
+    if(date_Start<=Date_to_Check && Date_to_Check<=date_Ending)
+        return true;
+    else
+        return false;
+
+}
 function CreateAlert(today,alerts,day,time,add_symbol){
     let begin=alertAPI.efective
     let end=alertAPI.efective.expires
@@ -25,6 +35,7 @@ function CreateAlert(today,alerts,day,time,add_symbol){
 function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
 
     async function VisualCrossing(location,dates,city_id,site_id,HashDateTimes){
+        console.log("VisualCrossing!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         let predictions=[]
         let API_KEY=APK.VisualCrossing_API_KEY
         let response=await fetch(`https://weather.visualcrossing.com/`+
@@ -71,6 +82,7 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
     }*/
     //AccuWeather('Athens','2025-8-1',APK.AccuWeather_API_KEY)
     async function WeatherApi(location,dates,city_id,site_id,HashDateTimes){// next two days keep me
+        console.log("WeatherAPI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         let lengthsub="YYYY-MM-DD ".length
         let alerts=[]
         let predictions=[]
@@ -80,9 +92,6 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         let responsejson=await response.json();
         let alertsFromAPI=responsejson.alerts.alert
         let forecastday=responsejson.forecast.forecastday///CHECK THIS
-        for (const day in HashDateTimes)
-            for(const time in HashDateTimes[day])
-                console.log(HashDateTimes[day][time].Date+" "+HashDateTimes[day][time].Time)
         for(const day of forecastday.slice(0,3)){
             let hour_forecasts=[day.hour[8],day.hour[15],day.hour[21]]
             for(const hour_forecast of hour_forecasts){
@@ -90,15 +99,13 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
                 let Timeslot=HashDateTimes[day.date][time.substring(lengthsub,time.length)+":00"]
                 if(Timeslot==null)
                     continue
-                console.log("DT "+day.date+" "+time.substring(lengthsub,time.length)+":00")
                 let prediction={}
                 prediction["City_Id"]=city_id
                 prediction["Site_Id"]=site_id
                 prediction["Timeslot_Id"]=Timeslot.Timeslot_Id
-                prediction["Weather"]=hour_forecast
+                prediction["Weather"]=JSON.stringify(hour_forecast)
                 prediction["Danger"]=responsejson.alerts.alert>0
                 predictions.push(prediction)
-                console.log(prediction)
                 for(let alertAPI of alertsFromAPI){
                     if(!alertAPI.areas.includes(responsejson.location.region))
                         continue
@@ -107,7 +114,6 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
                 }
             }
         }
-        console.log(alerts.length)
         return [predictions,alerts]
         console.log(responsejson.forecast.forecastday[0].hour[0])
         console.log(responsejson.alerts.alert)
@@ -115,20 +121,21 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
     }
     
     async function WeatherBit(location,dates,city_id,site_id,HashDateTimes){
+        console.log("WeatherBit!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         let predictions=[]
         let alerts=[]
         let API_KEY=APK.Weatherbit_API_KEY
         let response= await fetch(`https://api.weatherbit.io/v2.0/current?city=${location}&key=${API_KEY}`,
             {headers:{ 'accept':'application/json'}})
-        let responsejson=response.json()
+        let responsejson=await response.json()
         let responsealert = await fetch(`https://api.weatherbit.io/v2.0/alerts?city=${location}&key=${API_KEY}`,
             {headers:{ 'accept':'application/json'}})
-        let responsealertjson=responsealert.json()
+        let responsealertjson=await responsealert.json()
         let alertsAPI=responsealertjson.alerts;
-        for(const date of HashDateTimes.Keys()){
-            for( const time of HashDateTimes.Keys()){
+        for(const date in HashDateTimes){
+            for( const time in HashDateTimes[date]){
                 predictions.push({"City_Id":city_id,"Site_Id":site_id,
-                "Timeslot_Id":HashDateTimes[date][time].Timeslot_Id,"Weather":responsejson.data[0],"Danger":responsealertjson.alerts.length>0})
+                "Timeslot_Id":HashDateTimes[date][time].Timeslot_Id,"Weather":JSON.stringify(responsejson.data[0]),"Danger":responsealertjson.alerts.length>0})
                 for(const alertAPI of alertsAPI){
                     let today=new Date();
                     CreateAlert(today,date,time,alerts,false)
@@ -140,6 +147,7 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
     }
 
     async function OpenMeteo(location,dates,city_id,site_id,HashDateTimes){
+        console.log("OpenMeteo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         let predictions=[]
         let alerts=[]
          let response=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}`

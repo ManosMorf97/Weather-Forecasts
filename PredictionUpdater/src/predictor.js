@@ -93,17 +93,8 @@ async function UpdateTimeslots(today,transaction){
     if (rows.length>0)
         await model.Timeslots.bulkCreate(rows,{transaction:transaction})
 }
-function InsideRange(begin_date,end_date,begin_time,end_time,day,hour){
-    let date_Start=new Date(begin_date+"T"+begin_time)
-    let date_Ending=new Date(end_date+"T"+end_time)
-    let Date_to_Check=new Date(day+"T"+hour)
-    if(date_Start<=Date_to_Check && Date_to_Check<=date_Ending)
-        return true;
-    else
-        return false;
 
-}
-function BringCurrentPredictionsNotifications(citySites,timeslots,HashCities,HashSites,HashDateTimes,callback){
+async function BringCurrentPredictionsNotifications(citySites,timeslots,HashCities,HashSites,HashDateTimes,callback){
     let predictions=[]
     let dates=[]
     let alerts=[]
@@ -116,7 +107,7 @@ function BringCurrentPredictionsNotifications(citySites,timeslots,HashCities,Has
         current_date=timeslot.Date
     }
     for (const citySite of citySites){
-        let [predictionsW,alertsW]=callback(HashSites[citySite.Site_Id],HashCities[citySite.City_Id],dates,citySite.City_Id,citySite.Site_Id,HashDateTimes)
+        let [predictionsW,alertsW]=await callback(HashSites[citySite.Site_Id],HashCities[citySite.City_Id],dates,citySite.City_Id,citySite.Site_Id,HashDateTimes)
         predictions.push(...predictionsW)
         alerts.push(...alertsW)
     }
@@ -276,7 +267,7 @@ async function main(callback,callbackDate){
 
 
         let citySites=await model.CitySites.findAll({raw:true,transaction:transaction})
-        let [predictions,notifications]=BringCurrentPredictionsNotifications(citySites,timeslots,HashCities,HashSites,HashDateTimes,callback)
+        let [predictions,notifications]=await BringCurrentPredictionsNotifications(citySites,timeslots,HashCities,HashSites,HashDateTimes,callback)
         await UpdateTablePredictions(predictions,await BinaryTreeDB(model.Predictions,transaction),transaction)
         await DeleteNoNeededNotifications(transaction)
         await UpdateTableNotifications(notifications,await BinaryTreeDB(model.Notifications,transaction),today,transaction)

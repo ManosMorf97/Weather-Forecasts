@@ -96,7 +96,7 @@ test("Testing Case 1",async ()=>{
         }
 
     let predictions=[]
-    let callback=(Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
+    let callback= async (Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
         let predictions=[]
         let alerts=[]
         let hours=["08:00:00","15:00:00","21:00:00"]
@@ -193,7 +193,7 @@ test("Testing Case 2",async ()=>{
         }
 
     let predictions=[]
-    let callback=(Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
+    let callback= async (Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
         let predictions=[]
         let alerts=[]
         let hours=["08:00:00","15:00:00","21:00:00"]
@@ -293,7 +293,7 @@ test("Testing Case 3",async ()=>{
         }
 
     let predictions=[]
-    let callback=(Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
+    let callback=async (Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
         let predictions=[]
         let alerts=[]
         let hours=["08:00:00","15:00:00","21:00:00"]
@@ -393,7 +393,7 @@ test("Testing Case 4",async ()=>{
     let predictions=[]
     let alerts=[]
     let userNotifications=[]
-    let callback=(Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
+    let callback=async (Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
         let predictions=[]
         let alerts=[]
         let hours=["08:00:00","15:00:00","21:00:00"]
@@ -540,7 +540,7 @@ test("Testing Case 5",async ()=>{
         for(const ts of timeslot_rows){
             HashDateTimes[ts.Date][ts.Time]=ts
         }
-    let callback=(Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
+    let callback=async (Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
         let predictions=[]
         let alerts=[]
         let hours=["08:00:00","15:00:00","21:00:00"]
@@ -666,7 +666,7 @@ test("Testing Case 6",async ()=>{
     let predictions=[]
     let alerts=[]
     let userNotifications=[]
-    let callback=(Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
+    let callback=async (Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
         let predictions=[]
         let alerts=[]
         let hours=["08:00:00","15:00:00","21:00:00"]
@@ -809,7 +809,7 @@ test("Testing Case 7",async ()=>{
     let predictions=[]
     let alerts=[]
     let userNotifications=[]
-    let callback=(Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
+    let callback=async (Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
         let predictions=[]
         let alerts=[]
         let hours=["08:00:00","15:00:00","21:00:00"]
@@ -970,7 +970,7 @@ test("Testing Case 8",async ()=>{
     let predictions=[]
     let alerts=[]
     let userNotifications=[]
-    let callback=(Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
+    let callback=async (Site_Name,City_Name,dates,City_Id,Site_Id,HashDateTimes)=>{
         let predictions=[]
         let alerts=[]
         let hours=["08:00:00","15:00:00","21:00:00"]
