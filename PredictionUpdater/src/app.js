@@ -40,12 +40,21 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         let API_KEY=APK.VisualCrossing_API_KEY
         let response=await fetch(`https://weather.visualcrossing.com/`+
             `VisualCrossingWebServices/rest/services/timeline`+
-            `/${location}/${dates[0]}/${dates[1]}/${dates[2]}}?key=${API_KEY}`,{headers:{ 'accept':'application/json'}})
+            `/${location}/${dates[0]}/${dates[2]}?key=${API_KEY}`,{headers:{ 'accept':'application/json'}})
+        console.log(response)
         let responsejson=await response.json();
-        for (const day of [response.days[0],response.days[1],response.days[2]]){
-            for (const timeweather of [response.hours[8],responsehours.hours[15],day.hours[21]]){
+        for(const key in HashDateTimes){
+            for(const subkey in HashDateTimes[key]){
+                console.log("KKK "+key+" "+subkey)
+            }
+        }
+        for (const day of [responsejson.days[0],responsejson.days[1],responsejson.days[2]]){
+            for (const timeweather of [day.hours[8],day.hours[15],day.hours[21]]){
+                let Timeslot=HashDateTimes[day.datetime][timeweather.datetime]
+                if(Timeslot==null)
+                    continue
                 predictions.push({"City_Id":city_id,"Site_Id":site_id,
-                "Timeslot_Id":HashDateTimes[day.datetime][timeweather.datetime].Timeslot_Id,"Weather":timeweather,"Danger":false})
+                "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":JSON.stringify(timeweather),"Danger":false})
             }
         }
         let alerts=[]
@@ -54,7 +63,6 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         return responsejson
         console.log(JSON.stringify(responsejson.days[0].hours[23]).length)
     }
-
     /*async function AccuWeather(location,dates,city_id,site_id,HashDateTimes){// all day same weather
         let predictions=[]
         let lengthsub="YYYY-MM-DD".length
