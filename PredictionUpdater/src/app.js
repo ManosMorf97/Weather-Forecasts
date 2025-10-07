@@ -139,7 +139,6 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
 
     async function OpenWeatherMap(location,dates,city_id,site_id,HashDateTimes){
         console.log("OpenWeatherMap!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        await new Promise(resolve => setTimeout(resolve, 3000));
         let predictions=[]
         let alerts=[]
         let API_KEY=APK.OpenWeatherMap_API_KEY
@@ -150,29 +149,26 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         console.log("LOCATION "+location)
         let latitude=responsejson[0].lat;
         let longitude=responsejson[0].lon;
-        await new Promise(resolve => setTimeout(resolve, 3000));
         let responseloc=await fetch(`https://api.openweathermap.org/data/2.5/forecast?`+
             `lat=${latitude}&lon=${longitude}&appid=${API_KEY}`,
             {headers:{ 'accept':'application/json'}})
         let responselocjson=await responseloc.json();
-        let indexes=[0,2,4]
-        for(let i=1; i<=2; i++)
-            for(let j=0; j<3; j++)
-                indexes.push(indexes[j]+8*i)
-        for(const index of indexes){
-            let datetime=responselocjson.list[index].dt_txt
-            let weather=responselocjson.list[index].weather
-            console.log(datetime)
+        for(element in responselocjson.list){
+            let datetime=element.dt_txt
             let date=datetime.substring(0,datetime.indexOf(" "))
             let time=datetime.substring(datetime.indexOf(" ")+1)
-            if(time.startsWith("09"))
-                time="08:00:00"
-            console.log(date)
-            if(HashDateTimes[date]==null)
+             if(HashDateTimes[date]==null)
                 continue
             let Timeslot=HashDateTimes[date][time]
             if(Timeslot==null)
                 continue
+            let weather=responselocjson.list[index].weather
+            console.log(datetime)
+            
+            if(time.startsWith("09"))
+                time="08:00:00"
+            console.log(date)
+           
             predictions.push({"City_Id":city_id,"Site_Id":site_id,
                 "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":weather+"C","Danger":false})
         }
