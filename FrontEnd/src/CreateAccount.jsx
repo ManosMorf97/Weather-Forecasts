@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.min.css'
 import {Link, useNavigate} from "react-router-dom"
-import { useState } from 'react'
+import React,{ useState } from 'react'
 import MD5 from './md5.js'
 import url from './url.js'
 //import { useState } from 'react'
@@ -16,7 +16,7 @@ import LoadingSpinner from './LoadingSpinner.jsx'
 function CreateAccount(){
     //let [openEye,toggleEye]=useState(false)
     let navigate=useNavigate()
-    let forecasts=["VisualCorssing","AccuWeather","WeatherApi","WeatherBit","Meteo"]
+    let forecasts=["VisualCorssing","WeatherApi","OpenWeatherMap","OpenMeteo"]
     let [active,activate]=useState(false)
     let [email,setEmail]=useState("")
     let [username,setUsername]=useState("")
@@ -25,7 +25,7 @@ function CreateAccount(){
     let [theirForecasts,setTheirForecasts]=useState([])
     let [theirCities,setTheirCities]=useState([])
     let jsxForecasts=forecasts.map(x=><option 
-        onClick={()=>!theirForecasts.includes(x)?setTheirForecasts([...theirForecasts,x]):""}key={x}>{x}</option>)
+        onClick={()=>!theirForecasts.includes(x)?setTheirForecasts([...theirForecasts,x]):{}}key={x}>{x}</option>)
     let jsxTheirForecasts=theirForecasts.map(x=><li key={x}>{x}</li>)
     let city_url=`https://api.api-ninjas.com/v1/city?X-Api-key=${API_KEY}&name=`
     //fetch(city_url).then((res)=>console.log(res.json()))
@@ -34,6 +34,7 @@ function CreateAccount(){
     let [message,setMessage]=useState("")*/
     let [response,setResponse]=useState({status:-1,message:""})
     async function postData(e){
+        console.log(theirCities[0])
         e.preventDefault()
         activate(ac=>!ac)
         let hashed_Password=MD5(password)
@@ -104,7 +105,12 @@ function CreateAccount(){
                         <br></br>
                         <label htmlFor="forecasts">Choose Forecast Sites</label>
                         <select id="forecasts" defaultValue="--select forecast sites--" onChange={
-                                ()=>response.status!=-1?setResponse({...response,status:-1}):{}}>
+                                (e)=>{
+                                    if(response.status!=-1)
+                                        setResponse({...response,status:-1})
+                                    if(e.target.value!="--select forecast sites--")
+                                        setTheirForecasts([...theirForecasts,e.target.value])
+                                }}>
                             <option disabled value="--select forecast sites--">--select forecast sites--</option>
                             {jsxForecasts}
                         </select>
@@ -120,6 +126,7 @@ function CreateAccount(){
                             e.preventDefault()
                             let res=await fetch(city_url+document.getElementById("city").value)
                             let city=await res.json()
+                            console.log("CITY++++++++"+city[0].name)
                             if(city[0]===undefined){
                                 setResponse(()=>({...res,status:0,message:"That city does not exist or is not available"}))
                                 //setResponse(0) 

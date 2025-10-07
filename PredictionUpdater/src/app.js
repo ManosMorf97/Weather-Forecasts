@@ -127,7 +127,7 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             console.log(datetime)
             let date=datetime.substring(0,datetime.indexOf("T"))
             let time=datetime.substring(datetime.indexOf("T")+1)
-            let Timeslot=HashDateTimes[date][time+"00"]
+            let Timeslot=HashDateTimes[date][time+":00"]
             if(Timeslot==null)
                 continue
             predictions.push({"City_Id":city_id,"Site_Id":site_id,
@@ -138,16 +138,21 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
     }
 
     async function OpenWeatherMap(location,dates,city_id,site_id,HashDateTimes){
+        console.log("OpenWeatherMap!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        await new Promise(resolve => setTimeout(resolve, 3000));
         let predictions=[]
         let alerts=[]
         let API_KEY=APK.OpenWeatherMap_API_KEY
         let response=await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${API_KEY}`
             ,{headers:{ 'accept':'application/json'}})
-        let responsejson=await response[0].json();
-        let latitude=responsejson.lat;
-        let longitude=responsejson.lon;
-        let responseloc=await fetch(`https://api.openweathermap.org/data/2.5/forecast?'+
-            'lat=${latitude}&lon=${longitude}&appid=${API_KEY}`,
+        console.log("RRRRRR"+response)
+        let responsejson=await response.json();
+        console.log("LOCATION "+location)
+        let latitude=responsejson[0].lat;
+        let longitude=responsejson[0].lon;
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        let responseloc=await fetch(`https://api.openweathermap.org/data/2.5/forecast?`+
+            `lat=${latitude}&lon=${longitude}&appid=${API_KEY}`,
             {headers:{ 'accept':'application/json'}})
         let responselocjson=await responseloc.json();
         let indexes=[0,2,4]
@@ -162,6 +167,9 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             let time=datetime.substring(datetime.indexOf(" ")+1)
             if(time.startsWith("09"))
                 time="08:00:00"
+            console.log(date)
+            if(HashDateTimes[date]==null)
+                continue
             let Timeslot=HashDateTimes[date][time]
             if(Timeslot==null)
                 continue
@@ -177,8 +185,6 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
     switch (site){
         case "VisualCrossing":
             return VisualCrossing(location,dates,city_id,site_id,HashDateTime)
-        case "AccuWeather":
-            return AccuWeather(location,dates,city_id,site_id,HashDateTime)
         case "WeatherApi":
             return WeatherApi(location,dates,city_id,site_id,HashDateTime)
         case "OpenWeatherMap":
