@@ -6,7 +6,8 @@ function Home(){
     let user=localStorage.getItem("UserLoggedIn")
     useEffect(()=>{
         if(user==null)
-        navigate('/logIn')},[user,navigate])
+        navigate('/logIn')
+    },[user,navigate])
     
     return(<>
         <h1>HELLO {user}</h1>
