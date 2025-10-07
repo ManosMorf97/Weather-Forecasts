@@ -63,32 +63,6 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         return responsejson
         console.log(JSON.stringify(responsejson.days[0].hours[23]).length)
     }
-    /*async function AccuWeather(location,dates,city_id,site_id,HashDateTimes){// all day same weather
-        let predictions=[]
-        let lengthsub="YYYY-MM-DD".length
-        let API_KEY=APK.AccuWeather_API_KEY
-        console.log("TTTT"+API_KEY)
-        let response=await fetch(`http://dataservice.accuweather.com/locations/v1/cities/search`+
-            `?apikey=${API_KEY}&q=${location}`,{headers:{ 'accept':'application/json'}})
-        let responsejson=await response.json();
-        console.log(responsejson)
-        let locationkey=responsejson[0].Key;
-        console.log(responsejson)
-        let responsekey=await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/`+
-            `${locationkey}?apikey=${API_KEY}&details=true&toplevel=true&metric=true`,{headers:{ 'accept':'application/json'}})
-        let responsekeyjson=await responsekey.json();
-        responsekeyjson.DailyForecasts[0]
-        for(const dayweather of responsekeyjson.DailyForecasts){
-            let my_date=dayweather.Date.substring(lengthsub)
-            for(const time of HashDateTimes[my_date].keys()){
-                predictions.push({"City_Id":city_id,"Site_Id":site_id,
-                "Timeslot_Id":HashDateTimes[my_date][time.datetime].timeslot_id,"Weather":dayweather,"Danger":false})
-            }
-        }
-        let alerts=[];
-        return {predictions,alerts}
-    }*/
-    //AccuWeather('Athens','2025-8-1',APK.AccuWeather_API_KEY)
     async function WeatherApi(location,dates,city_id,site_id,HashDateTimes){// next two days keep me
         console.log("WeatherAPI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         let lengthsub="YYYY-MM-DD ".length
@@ -127,32 +101,6 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         console.log(responsejson.alerts.alert)
         
     }
-    
-    async function WeatherBit(location,dates,city_id,site_id,HashDateTimes){
-        console.log("WeatherBit!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        let predictions=[]
-        let alerts=[]
-        let API_KEY=APK.Weatherbit_API_KEY
-        let response= await fetch(`https://api.weatherbit.io/v2.0/current?city=${location}&key=${API_KEY}`,
-            {headers:{ 'accept':'application/json'}})
-        let responsejson=await response.json()
-        let responsealert = await fetch(`https://api.weatherbit.io/v2.0/alerts?city=${location}&key=${API_KEY}`,
-            {headers:{ 'accept':'application/json'}})
-        let responsealertjson=await responsealert.json()
-        let alertsAPI=responsealertjson.alerts;
-        for(const date in HashDateTimes){
-            for( const time in HashDateTimes[date]){
-                predictions.push({"City_Id":city_id,"Site_Id":site_id,
-                "Timeslot_Id":HashDateTimes[date][time].Timeslot_Id,"Weather":JSON.stringify(responsejson.data[0]),"Danger":responsealertjson.alerts.length>0})
-                for(const alertAPI of alertsAPI){
-                    let today=new Date();
-                    CreateAlert(today,date,time,alerts,false)
-                }
-            }
-        }
-        return [predictions,alerts]
-        console.log(responsejson.data[0])
-    }
 
     async function OpenMeteo(location,dates,city_id,site_id,HashDateTimes){
         console.log("OpenMeteo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -188,6 +136,44 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         return [predictions,alerts]
         console.log(responselocjson.hourly.temperature_2m[0])
     }
+
+    async function OpenWeatherMap(location,dates,city_id,site_id,HashDateTimes){
+        let predictions=[]
+        let alerts=[]
+        let API_KEY=APK.OpenWeatherMap_API_KEY
+        let response=await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${API_KEY}`
+            ,{headers:{ 'accept':'application/json'}})
+        let responsejson=await response[0].json();
+        let latitude=responsejson.lat;
+        let longitude=responsejson.lon;
+        let responseloc=await fetch(`https://api.openweathermap.org/data/2.5/forecast?'+
+            'lat=${latitude}&lon=${longitude}&appid=${API_KEY}`,
+            {headers:{ 'accept':'application/json'}})
+        let responselocjson=await responseloc.json();
+        let indexes=[0,2,4]
+        for(let i=1; i<=2; i++)
+            for(let j=0; j<3; j++)
+                indexes.push(indexes[j]+8*i)
+        for(const index of indexes){
+            let datetime=responselocjson.list[index].dt_txt
+            let weather=responselocjson.list[index].weather
+            console.log(datetime)
+            let date=datetime.substring(0,datetime.indexOf(" "))
+            let time=datetime.substring(datetime.indexOf(" ")+1)
+            if(time.startsWith("09"))
+                time="08:00:00"
+            let Timeslot=HashDateTimes[date][time]
+            if(Timeslot==null)
+                continue
+            predictions.push({"City_Id":city_id,"Site_Id":site_id,
+                "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":weather+"C","Danger":false})
+        }
+        //0 2 4
+
+
+        return [predictions,alerts]
+
+    }
     switch (site){
         case "VisualCrossing":
             return VisualCrossing(location,dates,city_id,site_id,HashDateTime)
@@ -195,8 +181,8 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             return AccuWeather(location,dates,city_id,site_id,HashDateTime)
         case "WeatherApi":
             return WeatherApi(location,dates,city_id,site_id,HashDateTime)
-        case "WeatherBit":
-            return WeatherBit(location,dates,city_id,site_id,HashDateTime)
+        case "OpenWeatherMap":
+            return OpenWeatherMap(location,dates,city_id,site_id,HashDateTime)
         case "OpenMeteo":
             return OpenMeteo(location,dates,city_id,site_id,HashDateTime)
     
