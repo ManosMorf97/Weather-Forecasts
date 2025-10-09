@@ -50,7 +50,14 @@ function Home(){
     return(<>
         <LoadingSpinner active={active}/>
         <div className="container">
-            <nav className={(active?"sleeping":"")+" top-cover bg-primary z-1 navbar bg-primary"}>HELLO {email}</nav>
+            <nav className={(active?"sleeping":"")+" top-cover bg-primary z-1 navbar bg-primary"}>
+                <div className="inline-h1">
+                    <h1 className="inline-h1">HELLO {email}</h1>
+                    <h1 className="inline-h1">All Predictions</h1>
+                    <h1 className="inline-h1">High Accuracy Predictions</h1>
+                </div>
+                
+            </nav>
         </div>
     </>)
 }
