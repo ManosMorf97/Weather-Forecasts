@@ -153,7 +153,8 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             `lat=${latitude}&lon=${longitude}&appid=${API_KEY}`,
             {headers:{ 'accept':'application/json'}})
         let responselocjson=await responseloc.json();
-        for(element in responselocjson.list){
+        for(element of responselocjson.list){
+            console.log("EL "+element)
             let datetime=element.dt_txt
             let date=datetime.substring(0,datetime.indexOf(" "))
             let time=datetime.substring(datetime.indexOf(" ")+1)
@@ -162,8 +163,8 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             let Timeslot=HashDateTimes[date][time]
             if(Timeslot==null)
                 continue
-            let weather=responselocjson.list[index].weather
-            console.log(datetime)
+            let weather=JSON.stringify(element.weather)
+            console.log("WWW "+weather)
             
             if(time.startsWith("09"))
                 time="08:00:00"
