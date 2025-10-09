@@ -2,3 +2,8 @@
     pointer-events: none;
     opacity: 0.3
 }
+
+nav{
+    width:100vw;
+    margin-bottom: 1vh;
+}

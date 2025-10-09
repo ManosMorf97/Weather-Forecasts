@@ -9,7 +9,7 @@ function Home(){
     
     let navigate=useNavigate()
     let [active,activate]=useState(true)
-    let user=null
+    let [email,setEmail]=useState("")
     var fetchUserData=async (url)=>{
         let storageNames=["usersPredictions","usersSuggestions","usersNotification","usersCountNotification"]
         let emptyStorage=false
@@ -20,8 +20,6 @@ function Home(){
             activate(false)
             return
         }
-            
-        let email=localStorage.getItem("UserLoggedIn")
         let controllers=["Predictions/","Suggestions/","Notifications/","Notifications/GetCountNotifications/"]
         for(let i=0; i<controllers.length; i++){
             var res= await fetch(url+controllers[i],{
@@ -30,7 +28,7 @@ function Home(){
                 headers:{
                     'Content-Type':'application/json'
                 },
-                body:JSON.stringify(email)
+                body:JSON.stringify(localStorage.getItem("UserLoggedIn"))
             })
             let resjson= await res.json()
             localStorage.setItem(storageNames[i],resjson)
@@ -40,16 +38,20 @@ function Home(){
     
     useEffect(()=>{
         console.log(localStorage.getItem("UserLoggedIn"))
-        user=localStorage.getItem("UserLoggedIn")
-        if(user==null)
+        if(localStorage.getItem("UserLoggedIn")==null)
             navigate('/logIn')
-        else
+        else{
+            setEmail(localStorage.getItem("UserLoggedIn"))
             fetchUserData(url)
+        }
+            
     },[navigate])
     
     return(<>
         <LoadingSpinner active={active}/>
-        <h1 className={active?"sleeping":""}>HELLO {user}</h1>
+        <div className="container">
+            <nav className={(active?"sleeping":"")+" top-cover bg-primary z-1 navbar bg-primary"}>HELLO {email}</nav>
+        </div>
     </>)
 }
 
