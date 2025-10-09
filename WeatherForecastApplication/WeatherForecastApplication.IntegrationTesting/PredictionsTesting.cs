@@ -117,7 +117,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 await dbContext.SaveChangesAsync();
 
                 var request_userInfo = "mmorf@gmail.com";
-                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions/UserInfo", request_userInfo);
+                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions", request_userInfo);
                 var responseContent = await response.Content.ReadAsStringAsync();
                 responseContent = responseContent.Substring(2, responseContent.Length - 4);
                 string[] test_predictions = responseContent.Split("},{");
@@ -140,7 +140,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 test_predictions.Count().Should().Be(8);
 
                 request_userInfo = "smart@gmail.com";
-                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions/UserInfo", request_userInfo);
+                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions", request_userInfo);
                 responseContent = await response.Content.ReadAsStringAsync();
                 responseContent = responseContent.Substring(2, responseContent.Length - 4);
                 test_predictions = responseContent.Split("},{");
@@ -198,7 +198,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
                 responseContent.Should().Be("Your rating has been submitted");
                 request_userInfo = "mmorf@gmail.com";
-                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions/UserInfo", request_userInfo);
+                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions", request_userInfo);
                 responseContent = await response.Content.ReadAsStringAsync();
 
                 responseContent = responseContent.Substring(2, responseContent.Length - 4);
@@ -219,7 +219,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                     test_predictions[i].Should().Contain("\"rating_Value\":" + rating_values[i]);
                 }
                 request_userInfo = "smart@gmail.com";
-                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions/UserInfo", request_userInfo);
+                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions", request_userInfo);
                 responseContent = await response.Content.ReadAsStringAsync();
                 responseContent = responseContent.Substring(2, responseContent.Length - 4);
                 test_predictions = responseContent.Split("},{");
@@ -250,7 +250,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 rating_values2[7] = 0;
 
                 request_userInfo = "mmorf@gmail.com";
-                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions/UserInfo", request_userInfo);
+                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions", request_userInfo);
                 responseContent = await response.Content.ReadAsStringAsync();
                 responseContent = responseContent.Substring(2, responseContent.Length - 4);
                 test_predictions = responseContent.Split("},{");
@@ -268,7 +268,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                     test_predictions[i].Should().Contain("\"rating_Value\":" + rating_values[i]);
                 }
                 request_userInfo = "smart@gmail.com";
-                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions/UserInfo", request_userInfo);
+                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions", request_userInfo);
                 responseContent = await response.Content.ReadAsStringAsync();
                 responseContent = responseContent.Substring(2, responseContent.Length - 4);
                 test_predictions = responseContent.Split("},{");
@@ -294,7 +294,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 responseContent.Should().Be("Your rating has been updated");
 
                 request_userInfo = "smart@gmail.com";
-                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions/UserInfo", request_userInfo);
+                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions", request_userInfo);
                 responseContent = await response.Content.ReadAsStringAsync();
                 responseContent = responseContent.Substring(2, responseContent.Length - 4);
                 test_predictions = responseContent.Split("},{");
@@ -327,7 +327,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 responseContent.Should().Be("Rating has been deleted");
 
                 request_userInfo = "mmorf@gmail.com";
-                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions/UserInfo", request_userInfo);
+                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions", request_userInfo);
                 responseContent = await response.Content.ReadAsStringAsync();
                 responseContent = responseContent.Substring(2, responseContent.Length - 4);
                 test_predictions = responseContent.Split("},{");
@@ -344,7 +344,7 @@ namespace WeatherForecastApplication.IntegrationTesting
                 }
 
                 request_userInfo = "smart@gmail.com";
-                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions/UserInfo", request_userInfo);
+                response = await client.PostAsJsonAsync("https://localhost:7038/Predictions", request_userInfo);
                 responseContent = await response.Content.ReadAsStringAsync();
                 responseContent = responseContent.Substring(2, responseContent.Length - 4);
                 test_predictions = responseContent.Split("},{");

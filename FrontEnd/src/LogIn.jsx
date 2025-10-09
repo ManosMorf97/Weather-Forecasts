@@ -10,6 +10,7 @@ import url from './url.js'
 import Alert from './Alert.jsx'
 import LoadingSpinner from './LoadingSpinner.jsx'
 import {Link, useNavigate} from "react-router-dom"
+
 function LogIn(){
     let navigate=useNavigate()
     let [openEye,toggleEye]=useState(false)
@@ -62,10 +63,10 @@ function LogIn(){
         if (res.status==200)
             await storeUser(url)
         setMessage(()=>res_message)
+
         activate(ac=>!ac)
         if(res.status==200)
             navigate("/")
-        
 
     }
     return (<>

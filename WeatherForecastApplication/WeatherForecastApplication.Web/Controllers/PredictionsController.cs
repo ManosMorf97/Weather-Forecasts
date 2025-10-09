@@ -23,7 +23,7 @@ namespace WeatherForecastApplication.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult UserInfo([FromBody] string email)
+        public JsonResult index([FromBody] string email)
         {
             var their_city_sites = _context.UserSiteCities.Where(usc => usc.Email.Equals(email)).
                 Select(usc=> new { usc.City_Id, usc.Site_Id })

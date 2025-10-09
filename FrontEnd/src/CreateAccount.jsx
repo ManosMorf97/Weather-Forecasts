@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.min.css'
 import {Link, useNavigate} from "react-router-dom"
-import React,{ useState } from 'react'
+import React,{ useState,useRef } from 'react'
 import MD5 from './md5.js'
 import url from './url.js'
 //import { useState } from 'react'
@@ -16,7 +16,7 @@ import LoadingSpinner from './LoadingSpinner.jsx'
 function CreateAccount(){
     //let [openEye,toggleEye]=useState(false)
     let navigate=useNavigate()
-    let forecasts=["VisualCorssing","WeatherApi","OpenWeatherMap","OpenMeteo"]
+    const forecasts=useRef(["VisualCorssing","WeatherApi","OpenWeatherMap","OpenMeteo"])
     let [active,activate]=useState(false)
     let [email,setEmail]=useState("")
     let [username,setUsername]=useState("")
@@ -24,7 +24,7 @@ function CreateAccount(){
     let [repeatedPassword,setRepeatedPassword]=useState("")
     let [theirForecasts,setTheirForecasts]=useState([])
     let [theirCities,setTheirCities]=useState([])
-    let jsxForecasts=forecasts.map(x=><option 
+    let jsxForecasts=forecasts.current.map(x=><option 
         onClick={()=>!theirForecasts.includes(x)?setTheirForecasts([...theirForecasts,x]):{}}key={x}>{x}</option>)
     let jsxTheirForecasts=theirForecasts.map(x=><li key={x}>{x}</li>)
     let city_url=`https://api.api-ninjas.com/v1/city?X-Api-key=${API_KEY}&name=`
@@ -126,7 +126,7 @@ function CreateAccount(){
                             e.preventDefault()
                             let res=await fetch(city_url+document.getElementById("city").value)
                             let city=await res.json()
-                            console.log("CITY++++++++"+city[0].name)
+                            //console.log("CITY++++++++"+city[0].name)
                             if(city[0]===undefined){
                                 setResponse(()=>({...res,status:0,message:"That city does not exist or is not available"}))
                                 //setResponse(0) 
