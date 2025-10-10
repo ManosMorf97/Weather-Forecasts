@@ -3,7 +3,7 @@
     opacity: 0.3
 }
 
-nav{
+.full-width{
     width:100vw;
     margin-bottom: 1vh;
 }
@@ -11,3 +11,4 @@ nav{
 .inline-h1{
     display:"inline";
 }
+

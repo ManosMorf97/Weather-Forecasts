@@ -49,15 +49,32 @@ function Home(){
     
     return(<>
         <LoadingSpinner active={active}/>
-        <div className="container">
-            <nav className={(active?"sleeping":"")+" top-cover bg-primary z-1 navbar bg-primary"}>
-                <div className="inline-h1">
-                    <h1 className="inline-h1">HELLO {email}</h1>
-                    <h1 className="inline-h1">All Predictions</h1>
-                    <h1 className="inline-h1">High Accuracy Predictions</h1>
-                </div>
-                
-            </nav>
+        <div className="container top-cover z-1">
+            <div className={(active?"sleeping":"")+"bg-primary text-light full-width background-card-color"}>
+                <h1 >WELCOME {email}</h1>
+                <nav className="  navbar navbar-light ">
+                    <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon text-white"></span>
+                    </button>
+                    <button className="bg-primary text-light">
+                       <h6 >All Predictions</h6> 
+                    </button>
+                    <button className="bg-primary text-light">
+                        <h6 >High Accuracy Predictions</h6>
+                    </button>
+                    <button className="bg-primary">
+                        <h4>
+                            <i className="bi bi-bell" style={{"color":"white"}}></i>
+                        </h4>
+                    </button>
+                    
+                </nav>
+                <button id="navbarNav" class="collapse bg-white text-primary border border-primary" style={{"float":"left","top-padding":"0px"}}>
+                    LOG OUT
+                </button>
+            </div>
+         
         </div>
     </>)
 }
