@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import { useEffect,useState,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import url from './url.js'
 import LoadingSpinner from './LoadingSpinner.jsx'
@@ -10,10 +10,11 @@ function Home(){
     let navigate=useNavigate()
     let [active,activate]=useState(true)
     let [email,setEmail]=useState("")
+    let storageNames=useRef(["usersPredictions","usersSuggestions","usersNotification","usersCountNotification"])
     var fetchUserData=async (url)=>{
-        let storageNames=["usersPredictions","usersSuggestions","usersNotification","usersCountNotification"]
+        
         let emptyStorage=false
-        for (let storageName of storageNames)
+        for (let storageName of storageNames.current)
             if(localStorage.getItem(storageName)==null)
                 emptyStorage=true
         if(!emptyStorage){
@@ -31,9 +32,17 @@ function Home(){
                 body:JSON.stringify(localStorage.getItem("UserLoggedIn"))
             })
             let resjson= await res.json()
-            localStorage.setItem(storageNames[i],resjson)
+            localStorage.setItem(storageNames.current[i],resjson)
         }
         activate(false)
+    }
+
+    var LogOut=(e)=>{
+        e.preventDefault()
+        for (let storageName of storageNames.current)
+            localStorage.removeItem(storageName)
+        localStorage.removeItem("UserLoggedIn")
+        navigate('/logIn')
     }
     
     useEffect(()=>{
@@ -49,13 +58,13 @@ function Home(){
     
     return(<>
         <LoadingSpinner active={active}/>
-        <div className="container top-cover z-1">
-            <div className={(active?"sleeping":"")+"bg-primary text-light full-width background-card-color"}>
+        <div className={(active?"sleeping":"")+" container top-cover z-1"}>
+            <div className={"bg-primary text-light full-width background-card-color"}>
                 <h1 >WELCOME {email}</h1>
-                <nav className="  navbar navbar-light ">
-                    <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                <nav className={(active?"sleeping":"")+"  navbar navbar-light "}>
+                    <button className="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon text-white"></span>
+                        <span className="navbar-toggler-icon text-white"></span>
                     </button>
                     <button className="bg-primary text-light">
                        <h6 >All Predictions</h6> 
@@ -63,14 +72,16 @@ function Home(){
                     <button className="bg-primary text-light">
                         <h6 >High Accuracy Predictions</h6>
                     </button>
-                    <button className="bg-primary">
+                    <button className="bg-primary" >
                         <h4>
                             <i className="bi bi-bell" style={{"color":"white"}}></i>
                         </h4>
                     </button>
                     
                 </nav>
-                <button id="navbarNav" class="collapse bg-white text-primary border border-primary" style={{"float":"left","top-padding":"0px"}}>
+                <button id="navbarNav" onClick={(e)=>LogOut(e)} 
+                className={(active?"sleeping":" ")+" collapse bg-white text-primary border border-primary"} 
+                style={{"float":"left","topPadding":"0px","display":active?"none ":" "}}>
                     LOG OUT
                 </button>
             </div>
