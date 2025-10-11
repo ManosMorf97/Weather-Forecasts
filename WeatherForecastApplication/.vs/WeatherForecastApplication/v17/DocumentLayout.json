@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.integrationtesting\\predictionstesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|solutionrelative:weatherforecastapplication.integrationtesting\\predictionstesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.web\\controllers\\predictionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|solutionrelative:weatherforecastapplication.web\\controllers\\predictionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.web\\controllers\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|solutionrelative:weatherforecastapplication.web\\controllers\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.integrationtesting\\predictionstesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CA78809-2DC7-4979-800B-A98E4F123EAB}|WeatherForecastApplication.IntegrationTesting\\WeatherForecastApplication.IntegrationTesting.csproj|solutionrelative:weatherforecastapplication.integrationtesting\\predictionstesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D50891BF-02F5-47D6-AA6E-70C9A70ED690}|WeatherForecastApplication.Web\\WeatherForecastApplication.Web.csproj|c:\\weather-forecasts\\weather-forecasts\\weatherforecastapplication\\weatherforecastapplication.web\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 249,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,19 +58,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "PredictionsTesting.cs",
               "DocumentMoniker": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\PredictionsTesting.cs",
               "RelativeDocumentMoniker": "WeatherForecastApplication.IntegrationTesting\\PredictionsTesting.cs",
               "ToolTip": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.IntegrationTesting\\PredictionsTesting.cs",
               "RelativeToolTip": "WeatherForecastApplication.IntegrationTesting\\PredictionsTesting.cs",
-              "ViewState": "AgIAALMAAAAAAAAAAAAawMUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAawHoAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T08:45:35.242Z"
+              "WhenOpened": "2025-10-09T08:45:35.242Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "NotificationsController.cs",
               "DocumentMoniker": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Controllers\\NotificationsController.cs",
               "RelativeDocumentMoniker": "WeatherForecastApplication.Web\\Controllers\\NotificationsController.cs",
@@ -78,12 +79,11 @@
               "RelativeToolTip": "WeatherForecastApplication.Web\\Controllers\\NotificationsController.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T07:48:40.166Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-09T07:48:40.166Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "PredictionsController.cs",
               "DocumentMoniker": "C:\\Weather-Forecasts\\Weather-Forecasts\\WeatherForecastApplication\\WeatherForecastApplication.Web\\Controllers\\PredictionsController.cs",
               "RelativeDocumentMoniker": "WeatherForecastApplication.Web\\Controllers\\PredictionsController.cs",
@@ -91,8 +91,7 @@
               "RelativeToolTip": "WeatherForecastApplication.Web\\Controllers\\PredictionsController.cs",
               "ViewState": "AgIAADAAAAAAAAAAAAAAAEoAAABmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T07:47:50.001Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-09T07:47:50.001Z"
             },
             {
               "$type": "Document",

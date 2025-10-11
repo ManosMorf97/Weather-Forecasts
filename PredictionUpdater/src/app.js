@@ -163,7 +163,7 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             let Timeslot=HashDateTimes[date][time]
             if(Timeslot==null)
                 continue
-            let weather=JSON.stringify(element.weather)
+            let weather=JSON.stringify(element.weather[0])
             console.log("WWW "+weather)
             
             if(time.startsWith("09"))
@@ -171,7 +171,7 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             console.log(date)
            
             predictions.push({"City_Id":city_id,"Site_Id":site_id,
-                "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":weather+"C","Danger":false})
+                "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":weather,"Danger":false})
         }
         //0 2 4
 

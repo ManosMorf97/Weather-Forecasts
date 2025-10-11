@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WeatherForecastApplication.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ca45666392b54c4b76547736cca29787a85bcc4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+820e2864f08e62450783c3a7fed459f825706c07")]
 [assembly: System.Reflection.AssemblyProductAttribute("WeatherForecastApplication.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WeatherForecastApplication.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
