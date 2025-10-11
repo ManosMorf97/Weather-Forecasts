@@ -16,7 +16,7 @@ import LoadingSpinner from './LoadingSpinner.jsx'
 function CreateAccount(){
     //let [openEye,toggleEye]=useState(false)
     let navigate=useNavigate()
-    const forecasts=useRef(["VisualCorssing","WeatherApi","OpenWeatherMap","OpenMeteo"])
+    const forecasts=useRef(["VisualCrossing","WeatherApi","OpenWeatherMap","OpenMeteo"])
     let [active,activate]=useState(false)
     let [email,setEmail]=useState("")
     let [username,setUsername]=useState("")

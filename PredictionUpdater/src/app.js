@@ -127,6 +127,8 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             console.log(datetime)
             let date=datetime.substring(0,datetime.indexOf("T"))
             let time=datetime.substring(datetime.indexOf("T")+1)
+            if(HashDateTimes[date]==null)
+                continue
             let Timeslot=HashDateTimes[date][time+":00"]
             if(Timeslot==null)
                 continue
