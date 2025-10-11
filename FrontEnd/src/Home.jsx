@@ -32,8 +32,8 @@ function Home(){
                 },
                 body:JSON.stringify(localStorage.getItem("UserLoggedIn"))
             })
-            let resjson= await res.json()
-            localStorage.setItem(storageNames.current[i],JSON.stringify(resjson))
+            let resjson= JSON.stringify(await res.json())
+            localStorage.setItem(storageNames.current[i],resjson)
         }
         activate(false)
     }
