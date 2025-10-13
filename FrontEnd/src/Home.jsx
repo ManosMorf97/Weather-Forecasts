@@ -11,6 +11,7 @@ function Home(){
     let navigate=useNavigate()
     let [active,activate]=useState(true)
     let [email,setEmail]=useState("")
+    let [predictions,setPredictions]=useState([])
     let storageNames=useRef(["usersPredictions","usersSuggestions","usersNotification","usersCountNotification"])
     var fetchUserData=async (url)=>{
         
@@ -19,6 +20,7 @@ function Home(){
             if(localStorage.getItem(storageName)==null)
                 emptyStorage=true
         if(!emptyStorage){
+            setPredictions(JSON.parse(localStorage.getItem(storageNames.current[0])))
             activate(false)
             return
         }
@@ -34,7 +36,9 @@ function Home(){
             })
             let resjson= JSON.stringify(await res.json())
             localStorage.setItem(storageNames.current[i],resjson)
+            setPredictions(JSON.parse(localStorage.getItem(storageNames.current[0])))
         }
+        
         activate(false)
     }
 
@@ -48,11 +52,29 @@ function Home(){
             fetchUserData(url)
         }
             
-    },[navigate])
+    },[])
     
     return(<>
         <LoadingSpinner active={active} />
-        <HomeNav active={active} email={email}/>
+        <div className="container">
+            <HomeNav active={active} email={email}/>
+            <table className="table-centered table table-dark">
+                <tbody>
+                    {predictions.length>0?
+                    predictions.map((x,index)=>
+                
+                    <tr key={index}>
+                        <td>{x.site_name}</td>
+                        <td>{x.city_name}</td>
+                        <td>{x.date}</td>
+                        <td>{x.time}</td>
+                    </tr>
+                
+                    ):<tr></tr>}
+                </tbody>
+            </table>
+        </div>
+        
     </>)
 }
 

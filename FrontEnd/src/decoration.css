@@ -7,7 +7,9 @@
     width:100vw;
     margin-bottom: 1vh;
 }
-
+.table-centered{
+    margin-top:11vh;
+}
 .inline-h1{
     display:"inline";
 }

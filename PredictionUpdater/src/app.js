@@ -53,6 +53,9 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
                 let Timeslot=HashDateTimes[day.datetime][timeweather.datetime]
                 if(Timeslot==null)
                     continue
+                let weatherObject={'dayNight':timeweather.icon,'temperature':timeweather.temp,'feelsLike':timeweather.feelslike,
+                    'windSpeed':timeweather.windspeed,'skyCondition':timeweather.conditions,'humidity':timeweather.humidity
+                }
                 predictions.push({"City_Id":city_id,"Site_Id":site_id,
                 "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":JSON.stringify(timeweather),"Danger":false})
             }
@@ -85,6 +88,9 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
                 prediction["City_Id"]=city_id
                 prediction["Site_Id"]=site_id
                 prediction["Timeslot_Id"]=Timeslot.Timeslot_Id
+                let weatherObject={'dayNight':time.condition.icon,'temperature':time.temp_c,'feelsLike':time.feels_like_c,
+                    'windSpeed':time.wind_kph,'skyCondition':time.condition.text,'humidity':time.humidity
+                }
                 prediction["Weather"]=JSON.stringify(hour_forecast)
                 prediction["Danger"]=responsejson.alerts.alert>0
                 predictions.push(prediction)
@@ -118,10 +124,11 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
                 indexes.push(indexes[j]+24*i)
         let responseloc=await fetch(`https://api.open-meteo.com/v1/forecast?`+
             `latitude=${latitude}&longitude=${longitude}`+
-            `&hourly=temperature_2m&forecast_days=3`,{headers:{ 'accept':'application/json'}})
+            `&hourly==temperature_2m,relative_humidity_2m,wind_speed_10m,is_day,apparent_temperature,weather_code&forecast_days=3`,
+            {headers:{ 'accept':'application/json'}})
         let responselocjson=await responseloc.json();
         console.log(responselocjson)
-        let temperature=responselocjson.hourly.temperature_2m
+        let forecast=responselocjson.hourly
         for(const index of indexes){
             let datetime=responselocjson.hourly.time[index]
             console.log(datetime)
@@ -132,8 +139,12 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             let Timeslot=HashDateTimes[date][time+":00"]
             if(Timeslot==null)
                 continue
+            let weatherObject={'dayNight':forecast.is_day[index],'temperature':forecast.temperature_2m[index],
+                'feelsLike':forecast.apparent_temperature[index],'windSpeed':forecast.wind_speed_10m[index],
+                'skyCondition':forecast.weather_code[index],'humidity':forecast.relative_humidity_2m[index]
+            }
             predictions.push({"City_Id":city_id,"Site_Id":site_id,
-                "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":temperature[index]+"C","Danger":false})
+                "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":forecast.temperature_2m[index]+"C","Danger":false})
         }
         return [predictions,alerts]
         console.log(responselocjson.hourly.temperature_2m[0])
@@ -152,7 +163,7 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         let latitude=responsejson[0].lat;
         let longitude=responsejson[0].lon;
         let responseloc=await fetch(`https://api.openweathermap.org/data/2.5/forecast?`+
-            `lat=${latitude}&lon=${longitude}&appid=${API_KEY}`,
+            `lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`,
             {headers:{ 'accept':'application/json'}})
         let responselocjson=await responseloc.json();
         for(element of responselocjson.list){
@@ -160,16 +171,21 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             let datetime=element.dt_txt
             let date=datetime.substring(0,datetime.indexOf(" "))
             let time=datetime.substring(datetime.indexOf(" ")+1)
+             if(time.startsWith("09"))
+                time="08:00:00"
              if(HashDateTimes[date]==null)
                 continue
+            
             let Timeslot=HashDateTimes[date][time]
             if(Timeslot==null)
                 continue
+            let weatherObject={'dayNight':element.sys.pod,'temperature':element.main.temp,'feelsLike':element.main.feels_like,
+                'windSpeed':element.wind.speed,'skyCondition':element.weather[0].description,'humidity':element.main.humidity,
+            }
             let weather=JSON.stringify(element.weather[0])
             console.log("WWW "+weather)
             
-            if(time.startsWith("09"))
-                time="08:00:00"
+           
             console.log(date)
            
             predictions.push({"City_Id":city_id,"Site_Id":site_id,
@@ -199,7 +215,7 @@ predictor.main(WeatherPredictions,callbackDate)
 
 
 /*
-
+celsius air sun/cloud/snow humidity pollen day/night  real feel
 
 
 */
