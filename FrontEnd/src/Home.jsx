@@ -56,9 +56,9 @@ function Home(){
     
     return(<>
         <LoadingSpinner active={active} />
-        <div className="container">
+        <div>
             <HomeNav active={active} email={email}/>
-            <table className="table-centered table table-dark">
+            <table className="table-centered table table-dark table-bordered z-1">
                 <thead>
                     <tr>
                         <th>Site Name</th>

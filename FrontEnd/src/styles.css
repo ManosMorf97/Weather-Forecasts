@@ -5,6 +5,9 @@
 input{
     margin:0 auto;
 }
+:root{
+    background-color: white;
+}
 .background-card-color{
     background-color: rgb(245, 243, 243);
 }

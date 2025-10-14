@@ -8,7 +8,13 @@
     margin-bottom: 1vh;
 }
 .table-centered{
-    margin-top:11vh;
+    top:200px !important;
+    left: 100px !important;
+    bottom: 100px !important;
+    width:90vw;
+    position: absolute;
+    overflow: auto;
+   /* margin-top:11vh;*/
 }
 .inline-h1{
     display:"inline";

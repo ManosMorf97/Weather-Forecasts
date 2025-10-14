@@ -28,5 +28,7 @@ function LoadingSpinner(props){
         <span className="visually-hidden">Loading...</span>
         </div>
     </>)
+    else
+        return(<></>)
 }
 export default LoadingSpinner

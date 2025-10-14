@@ -16,7 +16,7 @@ function HomeNav(props){
     }
     
     return(
-        <div className={(props.active?"sleeping":"")+" container top-cover z-1"}>
+        <div className={(props.active?"sleeping":"")+" top-cover z-1"}>
             <div className={"bg-primary text-light full-width background-card-color"}>
                 <h1 >WELCOME {props.email}</h1>
                 <nav className={(props.active?"sleeping":"")+"  navbar navbar-light "}>
