@@ -59,16 +59,47 @@ function Home(){
         <div className="container">
             <HomeNav active={active} email={email}/>
             <table className="table-centered table table-dark">
-                <tbody>
-                    {predictions.length>0?
-                    predictions.map((x,index)=>
-                
-                    <tr key={index}>
-                        <td>{x.site_name}</td>
-                        <td>{x.city_name}</td>
-                        <td>{x.date}</td>
-                        <td>{x.time}</td>
+                <thead>
+                    <tr>
+                        <th>Site Name</th>
+                        <th>City Name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>DayNight</th>
+                        <th>Temperature</th>
+                        <th>Temperature Feels</th>
+                        <th>Wind Speed</th>
+                        <th>Day Or Night</th>
+                        <th>Humidity</th>
                     </tr>
+                    
+                </thead>
+                <tbody>
+                    {predictions.filter(x=>new Date(Date.now())<=new Date(x.date+'T'+x.time)).
+                    length>0?
+                    predictions.filter(x=>new Date(Date.now())<=new Date(x.date+'T'+x.time))
+                    .map((x,index)=>{
+                        let weather=JSON.parse(x.weather)
+                        return(
+                        <tr key={index}>
+                            <td>{x.site_name}</td>
+                            <td>{x.city_name}</td>
+                            <td>{x.date}</td>
+                            <td>{x.time}</td>
+                            <td>{weather.dayNight}</td>
+                            <td>{weather.temperature}</td>
+                            <td>{weather.feelsLike}</td>
+                            <td>{weather.windSpeed}</td>
+                            <td>{weather.skyCondition}</td>
+                            <td>{weather.humidity}</td>
+                        </tr>
+                        )
+                        
+
+
+                    }
+                        
+                    
                 
                     ):<tr></tr>}
                 </tbody>

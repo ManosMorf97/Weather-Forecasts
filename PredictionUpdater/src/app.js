@@ -53,11 +53,12 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
                 let Timeslot=HashDateTimes[day.datetime][timeweather.datetime]
                 if(Timeslot==null)
                     continue
-                let weatherObject={'dayNight':timeweather.icon,'temperature':timeweather.temp,'feelsLike':timeweather.feelslike,
+                let weatherObject={'dayNight':timeweather.icon.includes("day")?'day':'night','temperature':timeweather.temp,
+                    'feelsLike':timeweather.feelslike,
                     'windSpeed':timeweather.windspeed,'skyCondition':timeweather.conditions,'humidity':timeweather.humidity
                 }
                 predictions.push({"City_Id":city_id,"Site_Id":site_id,
-                "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":JSON.stringify(timeweather),"Danger":false})
+                "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":JSON.stringify(weatherObject),"Danger":false})
             }
         }
         let alerts=[]
@@ -88,10 +89,11 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
                 prediction["City_Id"]=city_id
                 prediction["Site_Id"]=site_id
                 prediction["Timeslot_Id"]=Timeslot.Timeslot_Id
-                let weatherObject={'dayNight':time.condition.icon,'temperature':time.temp_c,'feelsLike':time.feels_like_c,
-                    'windSpeed':time.wind_kph,'skyCondition':time.condition.text,'humidity':time.humidity
+                let weatherObject={'dayNight':hour_forecast.condition.icon.includes("day")?'day':'night','temperature':hour_forecast.temp_c,
+                    'feelsLike':hour_forecast.feelslike_c,'windSpeed':hour_forecast.wind_kph,
+                    'skyCondition':hour_forecast.condition.text,'humidity':hour_forecast.humidity
                 }
-                prediction["Weather"]=JSON.stringify(hour_forecast)
+                prediction["Weather"]=JSON.stringify(weatherObject)
                 prediction["Danger"]=responsejson.alerts.alert>0
                 predictions.push(prediction)
                 for(let alertAPI of alertsFromAPI){
@@ -124,7 +126,7 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
                 indexes.push(indexes[j]+24*i)
         let responseloc=await fetch(`https://api.open-meteo.com/v1/forecast?`+
             `latitude=${latitude}&longitude=${longitude}`+
-            `&hourly==temperature_2m,relative_humidity_2m,wind_speed_10m,is_day,apparent_temperature,weather_code&forecast_days=3`,
+            `&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,is_day,apparent_temperature,weather_code&forecast_days=3`,
             {headers:{ 'accept':'application/json'}})
         let responselocjson=await responseloc.json();
         console.log(responselocjson)
@@ -139,12 +141,12 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             let Timeslot=HashDateTimes[date][time+":00"]
             if(Timeslot==null)
                 continue
-            let weatherObject={'dayNight':forecast.is_day[index],'temperature':forecast.temperature_2m[index],
+            let weatherObject={'dayNight':forecast.is_day[index]==1?'day':'night','temperature':forecast.temperature_2m[index],
                 'feelsLike':forecast.apparent_temperature[index],'windSpeed':forecast.wind_speed_10m[index],
                 'skyCondition':forecast.weather_code[index],'humidity':forecast.relative_humidity_2m[index]
             }
             predictions.push({"City_Id":city_id,"Site_Id":site_id,
-                "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":forecast.temperature_2m[index]+"C","Danger":false})
+                "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":JSON.stringify(weatherObject),"Danger":false})
         }
         return [predictions,alerts]
         console.log(responselocjson.hourly.temperature_2m[0])
@@ -166,7 +168,7 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             `lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`,
             {headers:{ 'accept':'application/json'}})
         let responselocjson=await responseloc.json();
-        for(element of responselocjson.list){
+        for(const element of responselocjson.list){
             console.log("EL "+element)
             let datetime=element.dt_txt
             let date=datetime.substring(0,datetime.indexOf(" "))
@@ -179,10 +181,10 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             let Timeslot=HashDateTimes[date][time]
             if(Timeslot==null)
                 continue
-            let weatherObject={'dayNight':element.sys.pod,'temperature':element.main.temp,'feelsLike':element.main.feels_like,
+            let weatherObject={'dayNight':element.sys.pod=='d'?'day':'night','temperature':element.main.temp,'feelsLike':element.main.feels_like,
                 'windSpeed':element.wind.speed,'skyCondition':element.weather[0].description,'humidity':element.main.humidity,
             }
-            let weather=JSON.stringify(element.weather[0])
+            let weather=JSON.stringify(weatherObject)
             console.log("WWW "+weather)
             
            
