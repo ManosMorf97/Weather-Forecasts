@@ -45,6 +45,7 @@ function Home(){
 
    
     useEffect(()=>{
+                console.log("RENE")
         console.log(localStorage.getItem("UserLoggedIn"))
         if(localStorage.getItem("UserLoggedIn")==null)
             navigate('/logIn')
