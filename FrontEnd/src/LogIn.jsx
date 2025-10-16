@@ -20,6 +20,12 @@ function LogIn(){
     let [message,setMessage]=useState("")
     let [active,activate]=useState(false)
 
+     var appearAlert=(status,message)=>{
+        setResponse(()=>status)
+        setMessage(()=>message)
+        setTimeout(()=>{setResponse(()=>-1); setMessage(()=>"");},5000)
+    }
+
     var storeUser=async (url)=>{
         if(email_Username.includes("@")){
             localStorage.setItem("UserLoggedIn",email_Username)
@@ -57,14 +63,14 @@ function LogIn(){
             body:JSON.stringify(data)
         })
        
-        setResponse(()=>1*res.status)
+        
         console.log(response)
         let res_message=await res.json()
         if (res.status==200)
             await storeUser(url)
-        setMessage(()=>res_message)
 
         activate(ac=>!ac)
+        appearAlert(res.status,res_message)
         if(res.status==200)
             navigate("/")
 
@@ -79,14 +85,14 @@ function LogIn(){
                     <form className="form" onSubmit={(e)=>signIn(e)}>
                         <p className="s-0">
                            <label htmlFor="EmailUsername" >Enter Email/Username </label><br></br>
-                            <input type="text" id="EmailUsername" onChange={(e)=>{setEmailUsername(e.target.value); setResponse(()=>-1)}}
+                            <input type="text" id="EmailUsername" onChange={(e)=>setEmailUsername(e.target.value)}
                             value={email_Username} className="bg-white text-dark" />    
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </p> 
                         <p className="s-0">
                             <label htmlFor="Password">Enter Password </label><br></br>
                             <input type={openEye?"text":"password"} id="Password"  value={password} 
-                            onChange={(e)=>{setPassword(e.target.value); setResponse(()=>-1)}}
+                            onChange={(e)=>setPassword(e.target.value)}
                             className="bg-white text-dark" />
                             <i className={openEye? "bi bi-eye":"bi bi-eye-slash"} id="togglePassword"
                             onClick={()=>toggleEye(ope=>!ope)}></i>

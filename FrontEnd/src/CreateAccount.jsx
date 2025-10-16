@@ -24,8 +24,7 @@ function CreateAccount(){
     let [repeatedPassword,setRepeatedPassword]=useState("")
     let [theirForecasts,setTheirForecasts]=useState([])
     let [theirCities,setTheirCities]=useState([])
-    let jsxForecasts=forecasts.current.map(x=><option 
-        onClick={()=>!theirForecasts.includes(x)?setTheirForecasts([...theirForecasts,x]):{}}key={x}>{x}</option>)
+    let jsxForecasts=forecasts.current.map(x=><option key={x}>{x}</option>)
     let jsxTheirForecasts=theirForecasts.map(x=><li key={x}>{x}</li>)
     let city_url=`https://api.api-ninjas.com/v1/city?X-Api-key=${API_KEY}&name=`
     //fetch(city_url).then((res)=>console.log(res.json()))
@@ -33,6 +32,10 @@ function CreateAccount(){
     /*let [response,setResponse]=useState(-1)
     let [message,setMessage]=useState("")*/
     let [response,setResponse]=useState({status:-1,message:""})
+    var appearAlert=(status,message)=>{
+        setResponse(()=>({...response,status:status,message:message}))
+        setTimeout(()=>{setResponse(()=>({...response,status:-1,message:message}))},5000)
+    }
     async function postData(e){
         console.log(theirCities[0])
         e.preventDefault()
@@ -40,12 +43,12 @@ function CreateAccount(){
         let hashed_Password=MD5(password)
         let hashed_PasswordR=MD5(repeatedPassword)
         if(hashed_Password!=hashed_PasswordR){
-            setResponse({...response,status:0,message:"Passwords do not match"})
+            appearAlert(0,"Passwords do not match")
             activate(ac=>!ac)
             return
         }
         if(password.length<=5){
-            setResponse({...response,status:0,message:"Password too small"})
+            appearAlert(0,"Password too small")
             activate(ac=>!ac)
             return
         }
@@ -64,7 +67,7 @@ function CreateAccount(){
             body:JSON.stringify(data)
         })
         let res_message=await res.json()
-        setResponse({...response,status:res.status,message:res_message})
+        appearAlert(res.status,res_message)
         activate(ac=>!ac)
         if (res.status==200){
             
@@ -84,31 +87,29 @@ function CreateAccount(){
                         <p className="s-0">
                            <label htmlFor="Email" >Enter Email </label><br></br>
                             <input type="email" id="Emai" value={email} className="bg-white text-dark" onChange={
-                                (e)=>{response.status!=-1?setResponse({...response,status:-1}):{}; setEmail(e.target.value)}}/>    
+                                (e)=> setEmail(e.target.value)}/>    
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </p>
                         <p className="s-0">
                            <label htmlFor="Username" >Enter Username </label><br></br>
                             <input type="text" id="Username" value={username} className="bg-white text-dark" onChange={
-                                (e)=>{response.status!=-1?setResponse({...response,status:-1}):{}; setUsername(e.target.value)}}/>    
+                                (e)=> setUsername(e.target.value)}/>    
                         </p>  
                         <p className="s-0">
                             <label htmlFor="Password">Enter Password </label><br></br>
                             <input type="password" id="Password" value={password} className="bg-white text-dark" onChange={
-                                (e)=>{response.status!=-1?setResponse({...response,status:-1}):{}; setPassword(e.target.value)}}/>
+                                (e)=> setPassword(e.target.value)}/>
                         </p>
                         <p className="s-0">
                             <label htmlFor="repeatedPassword">Repeat Password </label><br></br>
                             <input type="password" id="repeatedPassword" value={repeatedPassword} className="bg-white text-dark" onChange={
-                                (e)=>{response.status!=-1?setResponse({...response,status:-1}):{}; setRepeatedPassword(e.target.value)}}/>
+                                (e)=> setRepeatedPassword(e.target.value)}/>
                         </p>
                         <br></br>
                         <label htmlFor="forecasts">Choose Forecast Sites</label>
                         <select id="forecasts" defaultValue="--select forecast sites--" onChange={
                                 (e)=>{
-                                    if(response.status!=-1)
-                                        setResponse({...response,status:-1})
-                                    if(e.target.value!="--select forecast sites--")
+                                    if(e.target.value!="--select forecast sites--"&&!theirForecasts.includes(e.target.value))
                                         setTheirForecasts([...theirForecasts,e.target.value])
                                 }}>
                             <option disabled value="--select forecast sites--">--select forecast sites--</option>
@@ -119,19 +120,21 @@ function CreateAccount(){
                         </ul>
                         <br></br>
                         <label htmlFor="city">Choose Cities</label><br></br>
-                        <input id="city"  type="text" placeholder="Type Cities you like" className="bg-white text-dark" onChange={
-                            ()=>response.status!=-1?setResponse({...response,status:-1}):{}}/>
+                        <input id="city"  type="text" placeholder="Type Cities you like" className="bg-white text-dark" />
                         <br/>
                         <button onClick={async (e)=>{
                             e.preventDefault()
                             let res=await fetch(city_url+document.getElementById("city").value)
                             let city=await res.json()
                             //console.log("CITY++++++++"+city[0].name)
+
                             if(city[0]===undefined){
-                                setResponse(()=>({...res,status:0,message:"That city does not exist or is not available"}))
-                                //setResponse(0) 
+                                appearAlert(0,"That city does not exist or is not available")
                                 //setMessage("That city does not exist or it is not available")
                                 console.log(response)
+                            }
+                            else if(theirCities.includes(city[0].name)){
+                                appearAlert(0,"You have already selected the city "+city[0])
                             }
                             else{
                                 setTheirCities([...theirCities,city[0].name]);
