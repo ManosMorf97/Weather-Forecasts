@@ -11,7 +11,7 @@ function TableAllPredictions(props){
     let [internalActive,setInternalActive]=useState(false)
     let [stateRatings,setStateRatings]=useState([])
 
-    var rateWeather=async(y,x,index)=>{
+    var dealWithRating=async(y,x,index,semi_url='Predictions/AddRating')=>{
         setInternalActive(iac=>!iac)
         let data={
             'email':localStorage.getItem("UserLoggedIn"),
@@ -20,7 +20,7 @@ function TableAllPredictions(props){
             "Timeslot_Id":x.timeslot_Id,
             "Rating_Value":y
         }
-        await fetch(url+'Predictions/AddRating',{
+        await fetch(url+semi_url,{
             method: "POST",
             mode: "cors",
             headers:{
@@ -28,13 +28,15 @@ function TableAllPredictions(props){
             },
             body:JSON.stringify(data)
         })
-        x.Rating_Value=y
-        setStateRatings(st=>st.map((x2,index2)=>index2==index?y:x2))
+        let new_Rating=semi_url==='Predictions/AddRating'?y:0
+        x.Rating_Value=new_Rating
+        setStateRatings(st=>st.map((x2,index2)=>index2==index?new_Rating:x2))
         let storageNames=["usersPredictions","usersSuggestions"]
         let controllers=["Predictions/","Suggestions/"]
         updateStorage(controllers,storageNames,url)
         setInternalActive(iac=>!iac)
     }
+
     useEffect(()=>{
         let predictionsString=localStorage.getItem("usersPredictions")
         if(predictionsString==null){
@@ -67,37 +69,44 @@ function TableAllPredictions(props){
                 <tbody>
                     {props.predictions.filter(x=>new Date(Date.now())<=new Date(x.date+'T'+x.time)).
                     length>0?
-                    props.predictions.filter(x=>new Date(Date.now())<=new Date(x.date+'T'+x.time))
-                    .map((x,index)=>{
-                        let weather=JSON.parse(x.weather)
-                        return(
-                        <tr key={index}>
-                            <td>{x.site_name}</td>
-                            <td>{x.city_name}</td>
-                            <td>{x.date}</td>
-                            <td>{x.time}</td>
-                            <td>{weather.dayNight}</td>
-                            <td>{weather.temperature}</td>
-                            <td>{weather.feelsLike}</td>
-                            <td>{weather.windSpeed}</td>
-                            <td>{weather.skyCondition}</td>
-                            <td>{weather.humidity}</td>
-                            <td>
-                                {[1,2,3,4,5].map((y,index2)=>y<=stateRatings[index]?
-                                    <span key={index2} className="bi bi-star-fill " onClick={()=>rateWeather(y,x,index)}></span>:
-                                    <span key={index2} className="bi bi-star " onClick={()=>rateWeather(y,x,index)}></span>)}
-                                {stateRatings[index]>0?<button className="bg-danger">Delete Rating</button>:<span></span>}
-                            </td>
-                        </tr>
-                        )
-                        
-
-
-                    }
+                        props.predictions.filter(x=>new Date(Date.now())<=new Date(x.date+'T'+x.time))
+                        .map((x,index)=>{
+                            let weather=JSON.parse(x.weather)
+                            return(
+                            <tr key={index}>
+                                <td>{x.site_name}</td>
+                                <td>{x.city_name}</td>
+                                <td>{x.date}</td>
+                                <td>{x.time}</td>
+                                <td>{weather.dayNight}</td>
+                                <td>{weather.temperature}</td>
+                                <td>{weather.feelsLike}</td>
+                                <td>{weather.windSpeed}</td>
+                                <td>{weather.skyCondition}</td>
+                                <td>{weather.humidity}</td>
+                                <td>
+                                    {[1,2,3,4,5].map((y,index2)=>y<=stateRatings[index]?
+                                        <span key={index2} className="bi bi-star-fill " onClick={()=>dealWithRating(y,x,index)}></span>:
+                                        <span key={index2} className="bi bi-star " onClick={()=>dealWithRating(y,x,index)}></span>)
+                                    }
+                                    {stateRatings[index]>0?
+                                        <button className="bg-danger" onClick={(e)=>
+                                        {e.preventDefault();
+                                        dealWithRating(stateRatings[index],x,index,'Predictions/DeleteRating')}
+                                        } >
+                                            Delete Rating
+                                        </button>:
+                                        <span></span>
+                                    }
+                                </td>
+                            </tr>
+                            )
+                        }
+                            
                         
                     
-                
-                    ):<tr></tr>}
+                        ):<tr></tr>
+                    }
                 </tbody>
             </table>
         </>
