@@ -29,7 +29,7 @@ function TableAllPredictions(props){
             body:JSON.stringify(data)
         })
         x.Rating_Value=y
-        setStateRatings(st=>st.map((x,index2)=>index2==index?y:x.Rating_Value))
+        setStateRatings(st=>st.map((x2,index2)=>index2==index?y:x2))
         let storageNames=["usersPredictions","usersSuggestions"]
         let controllers=["Predictions/","Suggestions/"]
         updateStorage(controllers,storageNames,url)
@@ -86,6 +86,7 @@ function TableAllPredictions(props){
                                 {[1,2,3,4,5].map((y,index2)=>y<=stateRatings[index]?
                                     <span key={index2} className="bi bi-star-fill " onClick={()=>rateWeather(y,x,index)}></span>:
                                     <span key={index2} className="bi bi-star " onClick={()=>rateWeather(y,x,index)}></span>)}
+                                {stateRatings[index]>0?<button className="bg-danger">Delete Rating</button>:<span></span>}
                             </td>
                         </tr>
                         )
