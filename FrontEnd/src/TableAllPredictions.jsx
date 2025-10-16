@@ -4,7 +4,7 @@ import './decoration.css'
 import url from './url.js'
 import LoadingSpinner from './LoadingSpinner'
 import { useEffect, useState } from 'react'
-
+import { updateStorage } from './utilities.js'
 
 function TableAllPredictions(props){
     
@@ -32,18 +32,7 @@ function TableAllPredictions(props){
         setStateRatings(st=>st.map((x,index2)=>index2==index?y:x.Rating_Value))
         let storageNames=["usersPredictions","usersSuggestions"]
         let controllers=["Predictions/","Suggestions/"]
-            for(let i=0; i<controllers.length; i++){
-                var res= await fetch(url+controllers[i],{
-                    method: "POST",
-                    mode: "cors",
-                    headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify(localStorage.getItem("UserLoggedIn"))
-                })
-                let resjson= JSON.stringify(await res.json())
-                localStorage.setItem(storageNames[i],resjson)
-            }
+        updateStorage(controllers,storageNames,url)
         setInternalActive(iac=>!iac)
     }
     useEffect(()=>{

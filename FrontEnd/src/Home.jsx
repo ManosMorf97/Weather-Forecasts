@@ -6,7 +6,7 @@ import HomeNav from "./HomeNav.jsx";
 import TableAllPredictions from "./TableAllPredictions.jsx";
 import './styles.css'
 import './decoration.css'
-
+import { updateStorage } from "./utilities.js";
 function Home(){
     
     let navigate=useNavigate()
@@ -26,19 +26,8 @@ function Home(){
             return
         }
         let controllers=["Predictions/","Suggestions/","Notifications/","Notifications/GetCountNotifications/"]
-        for(let i=0; i<controllers.length; i++){
-            var res= await fetch(url+controllers[i],{
-                method: "POST",
-                mode: "cors",
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify(localStorage.getItem("UserLoggedIn"))
-            })
-            let resjson= JSON.stringify(await res.json())
-            localStorage.setItem(storageNames.current[i],resjson)
-            setPredictions(JSON.parse(localStorage.getItem(storageNames.current[0])))
-        }
+        await updateStorage(controllers,storageNames.current,url)
+        setPredictions(JSON.parse(localStorage.getItem(storageNames.current[0])))
         
         activate(false)
     }

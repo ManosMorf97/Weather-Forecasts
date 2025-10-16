@@ -107,8 +107,7 @@
               "RelativeToolTip": "WeatherForecastApplication.Web\\Controllers\\PredictionsController.cs",
               "ViewState": "AgIAAEAAAAAAAAAAAAAAAE0AAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T07:47:50.001Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-09T07:47:50.001Z"
             },
             {
               "$type": "Document",
@@ -144,8 +143,7 @@
               "RelativeToolTip": "WeatherForecastApplication.Web\\Controllers\\AuthenticationController.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAAABQAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T10:59:43.59Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-23T10:59:43.59Z"
             },
             {
               "$type": "Document",
@@ -157,8 +155,7 @@
               "RelativeToolTip": "WeatherForecastApplication.IntegrationTesting\\UserAuthenticationTesting.cs",
               "ViewState": "AgIAAAEDAAAAAAAAAAAAAAkDAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T10:59:14.298Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-23T10:59:14.298Z"
             }
           ]
         }
