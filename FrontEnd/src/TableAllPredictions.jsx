@@ -102,8 +102,8 @@ function TableAllPredictions(){
                                 <td>{weather.humidity}</td>
                                 <td>
                                     {[1,2,3,4,5].map((y,index2)=>y<=stateRatings[index]?
-                                        <span key={index2} className="bi bi-star-fill " onClick={()=>dealWithRating(y,x,index)}></span>:
-                                        <span key={index2} className="bi bi-star " onClick={()=>dealWithRating(y,x,index)}></span>)
+                                        <span key={index2} className="bi bi-star-fill star-yellow" onClick={()=>dealWithRating(y,x,index)}></span>:
+                                        <span key={index2} className="bi bi-star star-yellow" onClick={()=>dealWithRating(y,x,index)}></span>)
                                     }
                                     {stateRatings[index]>0?
                                         <button className="bg-danger" onClick={(e)=>
