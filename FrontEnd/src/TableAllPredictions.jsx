@@ -76,7 +76,7 @@ function TableAllPredictions(){
                         <th>Temperature</th>
                         <th>Temperature Feels</th>
                         <th>Wind Speed</th>
-                        <th>Day Or Night</th>
+                        <th>Sky Condition</th>
                         <th>Humidity</th>
                         <th>Rating Value</th>
                     </tr>
@@ -95,8 +95,8 @@ function TableAllPredictions(){
                                 <td>{x.date}</td>
                                 <td>{x.time}</td>
                                 <td>{weather.dayNight}</td>
-                                <td>{weather.temperature}</td>
-                                <td>{weather.feelsLike}</td>
+                                <td>{weather.temperature +'°C'}</td>
+                                <td>{weather.feelsLike+ '°C'}</td>
                                 <td>{weather.windSpeed}</td>
                                 <td>{weather.skyCondition}</td>
                                 <td>{weather.humidity}</td>
