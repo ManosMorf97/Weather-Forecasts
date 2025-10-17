@@ -25,16 +25,28 @@ function CreateAccount(){
     let [theirForecasts,setTheirForecasts]=useState([])
     let [theirCities,setTheirCities]=useState([])
     let jsxForecasts=forecasts.current.map(x=><option key={x}>{x}</option>)
-    let jsxTheirForecasts=theirForecasts.map(x=><li key={x}>{x}</li>)
+    let jsxTheirForecasts=theirForecasts.map((x,index)=>
+    <li key={x}>{x} 
+        <button type="button" className="btn-close btn-close-red" aria-label="Close" style={{'float':'right'}} 
+        onClick={(e)=>removeElement(e,index,setTheirForecasts)}></button>
+    </li>)
     let city_url=`https://api.api-ninjas.com/v1/city?X-Api-key=${API_KEY}&name=`
     //fetch(city_url).then((res)=>console.log(res.json()))
-    let jsxTheirCities=theirCities.map(x=><li key={x}>{x}</li>)
+    let jsxTheirCities=theirCities.map((x,index)=>
+    <li key={x}>{x}
+        <button type="button" className="btn-close btn-close-red" aria-label="Close" style={{'float':'right'}} 
+        onClick={(e)=>removeElement(e,index,setTheirCities)}></button>
+    </li>)
     /*let [response,setResponse]=useState(-1)
     let [message,setMessage]=useState("")*/
     let [response,setResponse]=useState({status:-1,message:""})
     var appearAlert=(status,message)=>{
         setResponse(()=>({...response,status:status,message:message}))
         setTimeout(()=>{setResponse(()=>({...response,status:-1,message:message}))},5000)
+    }
+    var removeElement=(e,index,setElement)=>{
+        e.preventDefault()
+        setElement(x=>x.filter((x2,index2)=>index2!=index))
     }
     async function postData(e){
         console.log(theirCities[0])

@@ -5,3 +5,7 @@ h1{
 body{
     background-color: rgb(245, 243, 243);
 }
+
+.btn-close-red {
+  filter: invert(27%) sepia(193%) saturate(6135%) hue-rotate(356deg) brightness(99%) contrast(1005%);
+}
