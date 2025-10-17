@@ -65,7 +65,7 @@ function TableAllPredictions(){
 
             <LoadingSpinner active={internalActive}></LoadingSpinner>
             <Alert status={response.status} message={response.message}></Alert>
-            <table className={(context.active?"non-displayed ":" ")+(internalActive?"sleeping ":" ")+"table-centered table table-dark table-bordered z-1"}>
+            <table className={(context.active?"non-displayed ":" ")+(internalActive?"sleeping ":" ")+"table-centered table table-dark table-bordered"}>
                 <thead>
                     <tr>
                         <th>Site Name</th>
