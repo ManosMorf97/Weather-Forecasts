@@ -91,7 +91,7 @@ function CreateAccount(){
     return (<>
         <LoadingSpinner active={active}/>
         <div className={(active?"non-displayed ":" ")+"container "}>
-            <Alert response={response.status} message={response.message} ></Alert>
+            <Alert status={response.status} message={response.message} ></Alert>
             <div className="central background-card-color no-padding">
                 <h1 className="top-cover bg-primary z-1">Create Account</h1>
                 <div className="justify-content-center ">

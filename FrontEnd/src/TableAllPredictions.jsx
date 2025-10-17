@@ -3,6 +3,7 @@ import './decoration.css'
 //import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
 import url from './url.js'
 import LoadingSpinner from './LoadingSpinner'
+import Alert from './Alert.jsx'
 import { useEffect, useState } from 'react'
 import { updateStorage } from './utilities.js'
 
@@ -11,6 +12,11 @@ function TableAllPredictions(props){
     let [internalActive,setInternalActive]=useState(false)
     let [stateRatings,setStateRatings]=useState([])
 
+    let [response,setResponse]=useState({status:-1,message:""})
+    var appearAlert=(status,message)=>{
+        setResponse(()=>({...response,status:status,message:message}))
+        setTimeout(()=>{setResponse(()=>({...response,status:-1,message:message}))},5000)
+    }
     var dealWithRating=async(y,x,index,semi_url='Predictions/AddRating')=>{
         setInternalActive(iac=>!iac)
         let data={
@@ -20,7 +26,7 @@ function TableAllPredictions(props){
             "Timeslot_Id":x.timeslot_Id,
             "Rating_Value":y
         }
-        await fetch(url+semi_url,{
+        let res=await fetch(url+semi_url,{
             method: "POST",
             mode: "cors",
             headers:{
@@ -28,6 +34,7 @@ function TableAllPredictions(props){
             },
             body:JSON.stringify(data)
         })
+        let res_message=await res.json()
         let new_Rating=semi_url==='Predictions/AddRating'?y:0
         x.Rating_Value=new_Rating
         setStateRatings(st=>st.map((x2,index2)=>index2==index?new_Rating:x2))
@@ -35,6 +42,7 @@ function TableAllPredictions(props){
         let controllers=["Predictions/","Suggestions/"]
         updateStorage(controllers,storageNames,url)
         setInternalActive(iac=>!iac)
+        appearAlert(res.status,res_message)
     }
 
     useEffect(()=>{
@@ -48,7 +56,9 @@ function TableAllPredictions(props){
     },[props.predictions])
     return(
         <>
+
             <LoadingSpinner active={internalActive}></LoadingSpinner>
+            <Alert status={response.status} message={response.message}></Alert>
             <table className={(props.active?"non-displayed ":" ")+(internalActive?"sleeping ":" ")+"table-centered table table-dark table-bordered z-1"}>
                 <thead>
                     <tr>

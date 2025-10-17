@@ -13,6 +13,7 @@ using WeatherForecastApplication.Web.Models;
 
 namespace WeatherForecastApplication.Web.Controllers
 {
+    [Produces("application/json")]
     public class PredictionsController : Controller
     {
         private readonly WeatherAppDbContext _context;

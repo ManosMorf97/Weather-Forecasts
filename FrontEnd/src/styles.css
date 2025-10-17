@@ -39,7 +39,7 @@ a{
 .top-cover{
     top:0px !important;
     left:0px !important;
-    position: absolute;
+    position: fixed;
     padding-left:0px;
     width:100vw;
 }

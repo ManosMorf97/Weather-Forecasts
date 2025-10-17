@@ -16,14 +16,12 @@ function LogIn(){
     let [openEye,toggleEye]=useState(false)
     let [email_Username,setEmailUsername]=useState("");
     let [password,setPassword]=useState("");
-    let [response,setResponse]=useState(-1)
-    let [message,setMessage]=useState("")
     let [active,activate]=useState(false)
 
-     var appearAlert=(status,message)=>{
-        setResponse(()=>status)
-        setMessage(()=>message)
-        setTimeout(()=>{setResponse(()=>-1); setMessage(()=>"");},5000)
+    let [response,setResponse]=useState({status:-1,message:""})
+    var appearAlert=(status,message)=>{
+        setResponse(()=>({...response,status:status,message:message}))
+        setTimeout(()=>{setResponse(()=>({...response,status:-1,message:message}))},5000)
     }
 
     var storeUser=async (url)=>{
@@ -78,7 +76,7 @@ function LogIn(){
     return (<>
         <LoadingSpinner active={active}></LoadingSpinner>
         <div className={(active?"non-displayed ":" ")+"container "}>
-            <Alert response={response} message={message}></Alert>
+            <Alert status={response.status} message={response.message}></Alert>
             <div className="central card-sm-1 card border-primary border-card background-card-color no-padding">
                 <h1 className="border-header-margin bg-primary margin-header">Log In</h1>
                 <div className="card-body  justify-content-center magrin-card ">
