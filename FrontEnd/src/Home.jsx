@@ -1,4 +1,4 @@
-import { useEffect,useState,useRef } from "react";
+import { useEffect,useState,useRef, useContext, createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import url from './url.js'
 import LoadingSpinner from './LoadingSpinner.jsx'
@@ -7,12 +7,16 @@ import TableAllPredictions from "./TableAllPredictions.jsx";
 import './styles.css'
 import './decoration.css'
 import { updateStorage } from "./utilities.js";
+
+export const MyContext=createContext();
+
 function Home(){
     
     let navigate=useNavigate()
-    let [active,activate]=useState(true)
+    let [content,setContent]=useState({active:true,predictions:[]})
+    //let [active,activate]=useState(true)
     let [email,setEmail]=useState("")
-    let [predictions,setPredictions]=useState([])
+    //let [predictions,setPredictions]=useState([])
     let storageNames=useRef(["usersPredictions","usersSuggestions","usersNotification","usersCountNotification"])
     var fetchUserData=async (url)=>{
         
@@ -21,20 +25,17 @@ function Home(){
             if(localStorage.getItem(storageName)==null)
                 emptyStorage=true
         if(!emptyStorage){
-            setPredictions(JSON.parse(localStorage.getItem(storageNames.current[0])))
-            activate(false)
+            setContent({...content,active:false,predictions:JSON.parse(localStorage.getItem(storageNames.current[0]))})
             return
         }
         let controllers=["Predictions/","Suggestions/","Notifications/","Notifications/GetCountNotifications/"]
         await updateStorage(controllers,storageNames.current,url)
-        setPredictions(JSON.parse(localStorage.getItem(storageNames.current[0])))
-        
-        activate(false)
+        setContent({...content,active:false,predictions:JSON.parse(localStorage.getItem(storageNames.current[0]))})
     }
 
    
     useEffect(()=>{
-                console.log("RENE")
+        console.log("RENE")
         console.log(localStorage.getItem("UserLoggedIn"))
         if(localStorage.getItem("UserLoggedIn")==null)
             navigate('/logIn')
@@ -46,10 +47,13 @@ function Home(){
     },[])
     
     return(<>
-        <LoadingSpinner active={active} />
+         <LoadingSpinner active={content.active} />
         <div>
-            <HomeNav active={active} email={email}/>
-            <TableAllPredictions active={active} predictions={predictions}/>
+            <MyContext.Provider value={content}>
+                <HomeNav email={email}/>
+            </MyContext.Provider>
+            
+            
         </div>
         
     </>)

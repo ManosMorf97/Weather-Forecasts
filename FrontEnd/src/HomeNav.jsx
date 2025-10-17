@@ -1,25 +1,28 @@
-import {useRef } from "react";
+import {useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import url from './url.js'
 import './styles.css'
 import './decoration.css'
+import TableAllPredictions from "./TableAllPredictions.jsx";
+import {MyContext} from './Home.jsx'
 
 function HomeNav(props){
     let navigate=useNavigate()
     let storageNames=useRef(["usersPredictions","usersSuggestions","usersNotification","usersCountNotification"])
-     var LogOut=(e)=>{
+    var LogOut=(e)=>{
         e.preventDefault()
         for (let storageName of storageNames.current)
             localStorage.removeItem(storageName)
         localStorage.removeItem("UserLoggedIn")
         navigate('/logIn')
     }
-    
+    let context=useContext(MyContext)
     return(
-        <div className={(props.active?"sleeping":"")+" top-cover z-1"}>
+        <>
+        <div className={(context.active?"sleeping":"")+" top-cover z-1"}>
             <div className={"bg-primary text-light full-width background-card-color"}>
                 <h1 >WELCOME {props.email}</h1>
-                <nav className={(props.active?"sleeping":"")+"  navbar navbar-light "}>
+                <nav className={(context.active?"sleeping":"")+"  navbar navbar-light "}>
                     <button className="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon text-white"></span>
@@ -38,13 +41,14 @@ function HomeNav(props){
                     
                 </nav>
                 <button id="navbarNav" onClick={(e)=>LogOut(e)} 
-                className={(props.active?"sleeping":" ")+" collapse bg-white text-primary border border-primary"} 
-                style={{"float":"left","topPadding":"0px","display":props.active?"none ":" "}}>
+                className={(context.active?"sleeping":" ")+" collapse bg-white text-primary border border-primary"} 
+                style={{"float":"left","topPadding":"0px","display":context.active?"none ":" "}}>
                     LOG OUT
                 </button>
             </div>
-         
         </div>
+        <TableAllPredictions/>
+        </>
     )
 }
 

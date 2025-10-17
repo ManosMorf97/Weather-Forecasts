@@ -4,15 +4,19 @@ import './decoration.css'
 import url from './url.js'
 import LoadingSpinner from './LoadingSpinner'
 import Alert from './Alert.jsx'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { updateStorage } from './utilities.js'
+import {MyContext} from './Home.jsx'
 
-function TableAllPredictions(props){
+function TableAllPredictions(){
     
     let [internalActive,setInternalActive]=useState(false)
     let [stateRatings,setStateRatings]=useState([])
 
     let [response,setResponse]=useState({status:-1,message:""})
+
+    let context=useContext(MyContext)
+    
     var appearAlert=(status,message)=>{
         setResponse(()=>({...response,status:status,message:message}))
         setTimeout(()=>{setResponse(()=>({...response,status:-1,message:message}))},5000)
@@ -53,13 +57,15 @@ function TableAllPredictions(props){
         }
         console.log("PSK")
         setStateRatings(()=>JSON.parse(predictionsString).filter(x=>new Date(Date.now())<=new Date(x.date+'T'+x.time)).map(x=>x.rating_Value))
-    },[props.predictions])
+    },[context.predictions])
+
+    
     return(
         <>
 
             <LoadingSpinner active={internalActive}></LoadingSpinner>
             <Alert status={response.status} message={response.message}></Alert>
-            <table className={(props.active?"non-displayed ":" ")+(internalActive?"sleeping ":" ")+"table-centered table table-dark table-bordered z-1"}>
+            <table className={(context.active?"non-displayed ":" ")+(internalActive?"sleeping ":" ")+"table-centered table table-dark table-bordered z-1"}>
                 <thead>
                     <tr>
                         <th>Site Name</th>
@@ -77,9 +83,9 @@ function TableAllPredictions(props){
                     
                 </thead>
                 <tbody>
-                    {props.predictions.filter(x=>new Date(Date.now())<=new Date(x.date+'T'+x.time)).
+                    {context.predictions.filter(x=>new Date(Date.now())<=new Date(x.date+'T'+x.time)).
                     length>0?
-                        props.predictions.filter(x=>new Date(Date.now())<=new Date(x.date+'T'+x.time))
+                        context.predictions.filter(x=>new Date(Date.now())<=new Date(x.date+'T'+x.time))
                         .map((x,index)=>{
                             let weather=JSON.parse(x.weather)
                             return(
