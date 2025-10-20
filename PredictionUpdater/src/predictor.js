@@ -280,7 +280,7 @@ async function main(callback,callbackDate){
     
 }
 //main(WeatherPredictions,callbackDate)
-module.exports={main};
+module.exports={main,CreateSQLDate,CreateSQLTime};
 
 
 /*

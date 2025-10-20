@@ -3,40 +3,66 @@ let predictor=require("./predictor");
 function callbackDate(){
     return new Date()
 }
-function InsideRange(begin_date,end_date,begin_time,end_time,day,hour){
-    let date_Start=new Date(begin_date+"T"+begin_time)
-    let date_Ending=new Date(end_date+"T"+end_time)
-    let Date_to_Check=new Date(day+"T"+hour)
-    if(date_Start<=Date_to_Check && Date_to_Check<=date_Ending)
-        return true;
-    else
-        return false;
-
-}
-function CreateAlert(today,alerts,day,time,add_symbol){
-    let begin=alertAPI.efective
-    let end=alertAPI.efective.expires
-    let begin_date=begin.substring(0,begin.indexOf("T"))
-    let end_date=end.substring(0,end.indexOf("T"))
-    let begin_time=begin.substring(begin.indexOf("T")+1)
-    let end_time=end.substring(end.indexOf("T")+1)
-    if(add_symbol){
-        begin_time=begin_time.substring(0,begin_time.indexOf("+"))
-        end_time=end_time.substring(end_time.indexOf("+")+1)
-    }
-    if (InsideRange(begin_date,end_date,begin_time,end_time,day,time))
-        alerts.push({"City_Id":city_id,"Site_Id":site_id,
-    "Timeslot_Id":HashDateTimes[day.date][time.substring(lengthsub,time.length)].timeslot_id,"Description":alertAPI,
-    "DateNotification":CreatSQLDate(today),
-    "TimeNotification":CreateSQLTime(today)})
 
 
-}
 function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
 
+    function InsideRange(begin_date,end_date,begin_time,end_time,day,hour){
+        let date_Start=new Date(begin_date+"T"+begin_time)
+        let date_Ending=new Date(end_date+"T"+end_time)
+        let Date_to_Check=new Date(day+"T"+hour)
+        if(date_Start<=Date_to_Check && Date_to_Check<=date_Ending)
+            return true;
+        else
+            return false;
+
+    }
+
+    function CreateSQLDate(date){
+        return date.getFullYear().toString()+"-"+(date.getMonth()+1).toString().padStart(2,'0')+
+        "-"+date.getDate().toString().padStart(2,'0');
+    }
+
+    function CreateSQLTime(time){
+        return time.getHours().toString().padStart(2,'0')+":"+time.getMinutes().toString().padStart(2,'0')+
+        ":"+time.getSeconds().toString().padStart(2,'0');
+    }
+
+    function CreateAlert(today,alerts,day,time,alertjson,Timeslot_Id,add_symbol){
+        let returned=false
+        console.log("POOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+        let begin=null
+        let end=null
+        if(add_symbol){
+            begin=alertjson.efective
+            end=alertjson.efective.expires
+        }else{
+            begin=alertjson.onset
+            end=alertjson.ends
+        }
+        let begin_date=begin.substring(0,begin.indexOf("T"))
+        let end_date=end.substring(0,end.indexOf("T"))
+        let begin_time=begin.substring(begin.indexOf("T")+1)
+        let end_time=end.substring(end.indexOf("T")+1)
+        if(add_symbol){
+            begin_time=begin_time.substring(0,begin_time.indexOf("+"))
+            end_time=end_time.substring(end_time.indexOf("+")+1)
+        }
+        returned=InsideRange(begin_date,end_date,begin_time,end_time,day,time)
+        if (returned)
+            alerts.push({"City_Id":city_id,"Site_Id":site_id,
+            "Timeslot_Id":Timeslot_Id,"Description":alertjson.description,
+            "DateNotification":CreateSQLDate(today),
+            "TimeNotification":CreateSQLTime(today)})
+        return returned
+        
+
+
+}
     async function VisualCrossing(location,dates,city_id,site_id,HashDateTimes){
         console.log("VisualCrossing!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         let predictions=[]
+        let alerts=[]
         let API_KEY=APK.VisualCrossing_API_KEY
         let response=await fetch(`https://weather.visualcrossing.com/`+
             `VisualCrossingWebServices/rest/services/timeline`+
@@ -57,11 +83,15 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
                     'feelsLike':timeweather.feelslike,
                     'windSpeed':timeweather.windspeed,'skyCondition':timeweather.conditions,'humidity':timeweather.humidity
                 }
+                let danger_exists=false
+                if(responsejson.alerts!=null && responsejson.alerts.length>0)
+                    danger_exists=CreateAlert(new Date(),alerts,day.datetime,timeweather.datetime,responsejson.alerts[0],Timeslot.Timeslot_Id,false)
                 predictions.push({"City_Id":city_id,"Site_Id":site_id,
-                "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":JSON.stringify(weatherObject),"Danger":false})
+                "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":JSON.stringify(weatherObject),"Danger":danger_exists})//FIXME
+                
             }
         }
-        let alerts=[]
+        
         return [predictions,alerts]
         console.log(responsejson)
         return responsejson
@@ -100,7 +130,7 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
                     if(!alertAPI.areas.includes(responsejson.location.region))
                         continue
                     let today=new Date()
-                    CreateAlert(today,alerts,day,time,true)
+                    //CreateAlert(today,alerts,day,time,alertAPI,true)
                 }
             }
         }
