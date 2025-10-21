@@ -44,9 +44,12 @@ function HomeNav(props){
                         onClick={(e)=>changeTab(e,"suggested_Predictions")}>
                             <h6 >Suggested Predictions</h6>
                         </button>
-                        <button className={current_tab==="Notifications"?"bg-white":"bg-primary"} >
+                        <button className={current_tab==="Notifications"?"bg-white":"bg-primary"+" position-relative"} >
+                            <div className="notification-badge bg-danger position-absolute mb-n6 float-right w-25" >3</div>
+                            <br></br>
                             <h4>
-                                <i className="bi bi-bell" style={{"color":current_tab=="Notifications"?"blue":"white"}}></i>
+                                <i className="bi bi-bell" style={{color:current_tab=="Notifications"?"blue":"white"}}>
+                                </i>
                             </h4>
                         </button>
                         
