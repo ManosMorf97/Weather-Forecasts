@@ -46,7 +46,7 @@ function CreateAccount(){
     }
     var removeElement=(e,index,setElement)=>{
         e.preventDefault()
-        setElement(x=>x.filter((x2,index2)=>index2!=index))
+        setElement(x=>x.filter((_,index2)=>index2!=index))
     }
     async function postData(e){
         console.log(theirCities[0])
