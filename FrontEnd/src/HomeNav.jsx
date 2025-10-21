@@ -6,12 +6,13 @@ import './decoration.css'
 import TableAllPredictions from "./TableAllPredictions.jsx";
 import {MyContext} from './Home.jsx'
 import TableSuggestedPredictions from "./TableSuggestedPredictions.jsx";
+import Notifications from "./TableNotifications.jsx";
 
 function HomeNav(props){
     let navigate=useNavigate()
     let storageNames=useRef(["usersPredictions","usersSuggestions","usersNotification","usersCountNotification"])
     let [current_tab,setCurrentTab]=useState('all_predictions')
-    let tabs=useRef({'all_predictions':<TableAllPredictions/>,'suggested_Predictions':<TableSuggestedPredictions/>,'Notifications':{}})
+    let tabs=useRef({'all_predictions':<TableAllPredictions/>,'suggested_Predictions':<TableSuggestedPredictions/>,'notifications':<Notifications/>})
     var LogOut=(e)=>{
         e.preventDefault()
         for (let storageName of storageNames.current)
@@ -44,7 +45,8 @@ function HomeNav(props){
                         onClick={(e)=>changeTab(e,"suggested_Predictions")}>
                             <h6 >Suggested Predictions</h6>
                         </button>
-                        <button className={current_tab==="Notifications"?"bg-white":"bg-primary"+" position-relative"} >
+                        <button className={current_tab==="Notifications"?"bg-white":"bg-primary"+" position-relative"}  
+                        onClick={(e)=>changeTab(e,"notifications")} >
                             <div className="notification-badge bg-danger position-absolute mb-n6 float-right w-25" >3</div>
                             <br></br>
                             <h4>
