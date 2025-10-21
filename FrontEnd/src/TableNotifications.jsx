@@ -9,8 +9,7 @@ function Notifications(){
     },[])
 
     return(
-        notifications.length>0&&notifications.filter(x=>new Date(Date.now())<=new Date(x.date+'T'+x.time)).
-                length>0? 
+        notifications.length>0? 
             <table className={"table-centered table table-danger table-bordered"}>
                 <thead>
                     <tr>
@@ -24,7 +23,7 @@ function Notifications(){
                 </thead>
                 <tbody>
                     {
-                        notifications.filter(x=>new Date(Date.now())<=new Date(x.date+'T'+x.time))
+                        notifications
                         .map((x,index)=>{
                             return(
                             <tr key={index}>

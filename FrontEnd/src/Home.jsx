@@ -16,6 +16,7 @@ function Home(){
     let [content,setContent]=useState({active:true,predictions:[]})
     //let [active,activate]=useState(true)
     let [email,setEmail]=useState("")
+    let [countNotif,setCountNotif]=useState(0)
     //let [predictions,setPredictions]=useState([])
     let storageNames=useRef(["usersPredictions","usersSuggestions","usersNotification","usersCountNotification"])
     var fetchUserData=async (url)=>{
@@ -31,6 +32,7 @@ function Home(){
         let controllers=["Predictions/","Suggestions/","Notifications/","Notifications/GetCountNotifications/"]
         await updateStorage(controllers,storageNames.current,url)
         setContent({...content,active:false,predictions:JSON.parse(localStorage.getItem(storageNames.current[0]))})
+        setCountNotif(localStorage.getItem("usersCountNotification"))
     }
 
    
@@ -50,7 +52,7 @@ function Home(){
          <LoadingSpinner active={content.active} />
         <div>
             <MyContext.Provider value={content}>
-                <HomeNav email={email}/>
+                <HomeNav email={email} countNotif={countNotif}/>
             </MyContext.Provider>
             
             

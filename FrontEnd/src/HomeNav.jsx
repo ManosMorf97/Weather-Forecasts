@@ -1,4 +1,4 @@
-import {useContext, useRef, useState } from "react";
+import {useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import url from './url.js'
 import './styles.css'
@@ -13,6 +13,7 @@ function HomeNav(props){
     let storageNames=useRef(["usersPredictions","usersSuggestions","usersNotification","usersCountNotification"])
     let [current_tab,setCurrentTab]=useState('all_predictions')
     let tabs=useRef({'all_predictions':<TableAllPredictions/>,'suggested_Predictions':<TableSuggestedPredictions/>,'notifications':<Notifications/>})
+    let [notificationCounter,setNotificationCounter]=useState(0)
     var LogOut=(e)=>{
         e.preventDefault()
         for (let storageName of storageNames.current)
@@ -26,6 +27,10 @@ function HomeNav(props){
             setCurrentTab(new_current_tab)
         }
     }
+    useEffect(()=>{
+        console.log("NOTFICIIA")
+        setNotificationCounter(()=>localStorage.getItem("usersCountNotification"))
+    },[props])
     let context=useContext(MyContext)
     return(
         <>
@@ -46,9 +51,14 @@ function HomeNav(props){
                             <h6 >Suggested Predictions</h6>
                         </button>
                         <button className={current_tab==="Notifications"?"bg-white":"bg-primary"+" position-relative"}  
-                        onClick={(e)=>changeTab(e,"notifications")} >
-                            <div className="notification-badge bg-danger position-absolute mb-n6 float-right w-25" >3</div>
-                            <br></br>
+                        onClick={(e)=>{changeTab(e,"notifications"); setNotificationCounter(()=>0);}} >
+                            {notificationCounter>0?
+                            <>
+                                <div className="notification-badge bg-danger position-absolute mb-n6 float-right w-25" >{notificationCounter}</div>
+                                <br></br>
+                            </>:
+                            <></>
+                            }
                             <h4>
                                 <i className="bi bi-bell" style={{color:current_tab=="Notifications"?"blue":"white"}}>
                                 </i>
