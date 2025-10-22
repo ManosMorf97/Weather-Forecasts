@@ -33,8 +33,8 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         let begin=null
         let end=null
         if(add_symbol){
-            begin=alertjson.efective
-            end=alertjson.efective.expires
+            begin=alertjson.effective
+            end=alertjson.expires
         }else{
             begin=alertjson.onset
             end=alertjson.ends
@@ -45,12 +45,17 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         let end_time=end.substring(end.indexOf("T")+1)
         if(add_symbol){
             begin_time=begin_time.substring(0,begin_time.indexOf("+"))
-            end_time=end_time.substring(end_time.indexOf("+")+1)
+            end_time=end_time.substring(0,end_time.indexOf("+"))
         }
         returned=InsideRange(begin_date,end_date,begin_time,end_time,day,time)
-        if (returned)
+        let alertdesc=null
+        if (add_symbol)
+            alertdesc=alertjson.desc
+        else
+            alertdesc=alertjson.description
+        if (returned&&alerts.filter(al=>al.City_Id==city_id&&al.Site_Id==site_id&&al.Timeslot_Id==Timeslot_Id).length==0)
             alerts.push({"City_Id":city_id,"Site_Id":site_id,
-            "Timeslot_Id":Timeslot_Id,"Description":alertjson.description,
+            "Timeslot_Id":Timeslot_Id,"Description":alertdesc,
             "DateNotification":CreateSQLDate(today),
             "TimeNotification":CreateSQLTime(today)})
         return returned
@@ -71,8 +76,8 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
                 let Timeslot=HashDateTimes[day.datetime][timeweather.datetime]
                 if(Timeslot==null)
                     continue
-                let weatherObject={'dayNight':timeweather.icon.includes("day")?'day':'night','temperature':timeweather.temp,
-                    'feelsLike':timeweather.feelslike,
+                let weatherObject={'dayNight':timeweather.icon.includes("day")?'day':'night','temperature':(5/9*(timeweather.temp-32)).toFixed(1),
+                    'feelsLike':(5/9*(timeweather.feelslike-32)).toFixed(1),
                     'windSpeed':timeweather.windspeed,'skyCondition':timeweather.conditions,'humidity':timeweather.humidity
                 }
                 let danger_exists=false
@@ -100,7 +105,8 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             let hour_forecasts=[day.hour[8],day.hour[15],day.hour[21]]
             for(const hour_forecast of hour_forecasts){
                 let time=hour_forecast.time
-                let Timeslot=HashDateTimes[day.date][time.substring(lengthsub,time.length)+":00"]
+                time=time.substring(lengthsub,time.length)+":00"
+                let Timeslot=HashDateTimes[day.date][time]
                 if(Timeslot==null)
                     continue
                 let prediction={}
@@ -118,7 +124,7 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
                     if(!alertAPI.areas.includes(responsejson.location.region))
                         continue
                     let today=new Date()
-                    //CreateAlert(today,alerts,day,time,alertAPI,true)
+                    CreateAlert(today,alerts,day.date,time,alertAPI,Timeslot.Timeslot_Id,true)
                 }
             }
         }
