@@ -7,6 +7,7 @@ import TableAllPredictions from "./TableAllPredictions.jsx";
 import {MyContext} from './Home.jsx'
 import TableSuggestedPredictions from "./TableSuggestedPredictions.jsx";
 import Notifications from "./TableNotifications.jsx";
+import LoadingSpinner from "./LoadingSpinner.jsx";
 
 function HomeNav(props){
     let navigate=useNavigate()
@@ -14,8 +15,22 @@ function HomeNav(props){
     let [current_tab,setCurrentTab]=useState('all_predictions')
     let tabs=useRef({'all_predictions':<TableAllPredictions/>,'suggested_Predictions':<TableSuggestedPredictions/>,'notifications':<Notifications/>})
     let [notificationCounter,setNotificationCounter]=useState(0)
-    var LogOut=(e)=>{
+    let [active2,activate2]=useState(false)
+    var LogOut=async (e)=>{
         e.preventDefault()
+        let current_url=url+'Notifications/ReadNotifications'
+        if(props.countNotif>0){
+            activate2(ac2=>!ac2)
+            await fetch(current_url,{
+                method:'POST',
+                mode:'cors',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(props.email)
+            })
+            activate2(ac2=>!ac2) 
+        }
         for (let storageName of storageNames.current)
             localStorage.removeItem(storageName)
         localStorage.removeItem("UserLoggedIn")
@@ -34,7 +49,8 @@ function HomeNav(props){
     let context=useContext(MyContext)
     return(
         <>
-            <div className={(context.active?"sleeping":"")+" top-cover z-1"}>
+            <LoadingSpinner active={active2}></LoadingSpinner>
+            <div className={(context.active||active2?"sleeping":"")+" top-cover z-1"}>
                 <div className={"bg-primary text-light full-width background-card-color"}>
                     <h1 >WELCOME {props.email}</h1>
                     <nav className={(context.active?"sleeping":"")+"  navbar navbar-light "}>

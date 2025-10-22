@@ -76,7 +76,6 @@ async function UpdateTimeslots(today,transaction){
         index_date=0
         index_time=0
     }
-    console.log("ID  "+index_date)
     for(let i=index_date; i<3; i++){
         let j=0
         if(i===index_date)
@@ -149,11 +148,8 @@ async function UpdateTablePredictions(predictions,predictionsDBT,transaction){
         else if (BTprediction[0].Weather!==prediction.Weather||BTprediction[0].Danger!==prediction.Danger) 
             toBeUpdated.push(prediction)
     }
-    console.log("LENE "+toBeUpdated.length)
     for(const prediction of toBeUpdated){
-        console.log("UND "+prediction.Weather)
         let predictionRow=await model.Predictions.findOne({where:{"Site_Id":prediction.Site_Id,"City_Id":prediction.City_Id,"Timeslot_Id":prediction.Timeslot_Id},transaction:transaction})
-        console.log("PRW "+predictionRow.Weather)
         predictionRow.Weather=prediction.Weather
         predictionRow.Danger=prediction.Danger
         try{
@@ -196,7 +192,6 @@ async function UpdateTableNotifications(notifications,notificationsDBT,today,tra
     }
     await model.Notifications.destroy({where:{"Description":'expired'},transaction:transaction})
     toBeInserted.push(...toBeUpdated)
-    console.log("LEEN "+toBeUpdated.length)
     let rows=toBeInserted.map((x)=>{ return{
         "City_Id":x.City_Id,"Site_Id":x.Site_Id,
                 "Timeslot_Id":x.Timeslot_Id,"Description":x.Description,
@@ -216,7 +211,6 @@ async function DeleteNoNeededNotifications(transaction){
 }
 async function main(callback,callbackDate){
     let transaction= await model.sequelize.transaction()
-    console.log("TRANS "+transaction)
     let today=callbackDate()
     try{
         await UpdateTimeslots(today,transaction)
@@ -271,7 +265,6 @@ async function main(callback,callbackDate){
         await UpdateTablePredictions(predictions,await BinaryTreeDB(model.Predictions,transaction),transaction)
         await DeleteNoNeededNotifications(transaction)
         await UpdateTableNotifications(notifications,await BinaryTreeDB(model.Notifications,transaction),today,transaction)
-        console.log("EEEEEEEEEENNNNNNNNNNDDDDD")
         await transaction.commit()
     }catch(error){
         await transaction.rollback();

@@ -30,7 +30,6 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
 
     function CreateAlert(today,alerts,day,time,alertjson,Timeslot_Id,add_symbol){
         let returned=false
-        console.log("POOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
         let begin=null
         let end=null
         if(add_symbol){
@@ -60,20 +59,13 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
 
 }
     async function VisualCrossing(location,dates,city_id,site_id,HashDateTimes){
-        console.log("VisualCrossing!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         let predictions=[]
         let alerts=[]
         let API_KEY=APK.VisualCrossing_API_KEY
         let response=await fetch(`https://weather.visualcrossing.com/`+
             `VisualCrossingWebServices/rest/services/timeline`+
             `/${location}/${dates[0]}/${dates[2]}?key=${API_KEY}`,{headers:{ 'accept':'application/json'}})
-        console.log(response)
         let responsejson=await response.json();
-        for(const key in HashDateTimes){
-            for(const subkey in HashDateTimes[key]){
-                console.log("KKK "+key+" "+subkey)
-            }
-        }
         for (const day of [responsejson.days[0],responsejson.days[1],responsejson.days[2]]){
             for (const timeweather of [day.hours[8],day.hours[15],day.hours[21]]){
                 let Timeslot=HashDateTimes[day.datetime][timeweather.datetime]
@@ -93,12 +85,8 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
         }
         
         return [predictions,alerts]
-        console.log(responsejson)
-        return responsejson
-        console.log(JSON.stringify(responsejson.days[0].hours[23]).length)
     }
     async function WeatherApi(location,dates,city_id,site_id,HashDateTimes){// next two days keep me
-        console.log("WeatherAPI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         let lengthsub="YYYY-MM-DD ".length
         let alerts=[]
         let predictions=[]
@@ -135,13 +123,10 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             }
         }
         return [predictions,alerts]
-        console.log(responsejson.forecast.forecastday[0].hour[0])
-        console.log(responsejson.alerts.alert)
         
     }
 
     async function OpenMeteo(location,dates,city_id,site_id,HashDateTimes){
-        console.log("OpenMeteo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         let predictions=[]
         let alerts=[]
          let response=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}`
@@ -159,11 +144,9 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             `&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,is_day,apparent_temperature,weather_code&forecast_days=3`,
             {headers:{ 'accept':'application/json'}})
         let responselocjson=await responseloc.json();
-        console.log(responselocjson)
         let forecast=responselocjson.hourly
         for(const index of indexes){
             let datetime=responselocjson.hourly.time[index]
-            console.log(datetime)
             let date=datetime.substring(0,datetime.indexOf("T"))
             let time=datetime.substring(datetime.indexOf("T")+1)
             if(HashDateTimes[date]==null)
@@ -179,19 +162,15 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
                 "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":JSON.stringify(weatherObject),"Danger":false})
         }
         return [predictions,alerts]
-        console.log(responselocjson.hourly.temperature_2m[0])
     }
 
     async function OpenWeatherMap(location,dates,city_id,site_id,HashDateTimes){
-        console.log("OpenWeatherMap!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         let predictions=[]
         let alerts=[]
         let API_KEY=APK.OpenWeatherMap_API_KEY
         let response=await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${API_KEY}`
             ,{headers:{ 'accept':'application/json'}})
-        console.log("RRRRRR"+response)
         let responsejson=await response.json();
-        console.log("LOCATION "+location)
         let latitude=responsejson[0].lat;
         let longitude=responsejson[0].lon;
         let responseloc=await fetch(`https://api.openweathermap.org/data/2.5/forecast?`+
@@ -199,7 +178,6 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
             {headers:{ 'accept':'application/json'}})
         let responselocjson=await responseloc.json();
         for(const element of responselocjson.list){
-            console.log("EL "+element)
             let datetime=element.dt_txt
             let date=datetime.substring(0,datetime.indexOf(" "))
             let time=datetime.substring(datetime.indexOf(" ")+1)
@@ -215,10 +193,6 @@ function WeatherPredictions(site,location,dates,city_id,site_id,HashDateTime){
                 'windSpeed':element.wind.speed,'skyCondition':element.weather[0].description,'humidity':element.main.humidity,
             }
             let weather=JSON.stringify(weatherObject)
-            console.log("WWW "+weather)
-            
-           
-            console.log(date)
            
             predictions.push({"City_Id":city_id,"Site_Id":site_id,
                 "Timeslot_Id":Timeslot.Timeslot_Id,"Weather":weather,"Danger":false})
