@@ -19,6 +19,9 @@ However, the approach to the solution is entirely mine.
 ### Databases
 - Microsoft SQL Server
 
+### Front-end Implementation
+- HTML, CSS, Bootstrap, JavaScript, React
+  
 ### Backend Implementation
 - **Users**: C#, ASP.NET, Entity Framework Core  
 - **Calendar**: Node.js, Sequelize  
@@ -30,6 +33,5 @@ However, the approach to the solution is entirely mine.
 ---
 
 ### ToDo
-- Implement frontend  
 - Rename some variables  
 - Optimize database operations for better performance  
